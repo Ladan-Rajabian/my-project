@@ -21,9 +21,12 @@ class LogInPage extends StatelessWidget {
                 'Healthy Way',
                 style: TextStyle(fontSize: 40),
               ),
+              const SizedBox(
+                height: 150,
+              ),
               Image.asset('assets/logo/logo.png'),
               const SizedBox(
-                height: 240,
+                height: 220,
               ),
               ElevatedButton(
                 style: ElevatedButton.styleFrom(
