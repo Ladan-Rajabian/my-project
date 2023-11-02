@@ -2,8 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_untiteld/misc/components/bottom_nav.dart';
 import 'package:flutter_untiteld/signup/signup_page.dart';
 
-
-
 class LogInPage extends StatelessWidget {
   const LogInPage({super.key});
 
@@ -23,8 +21,9 @@ class LogInPage extends StatelessWidget {
                 'Healthy Way',
                 style: TextStyle(fontSize: 40),
               ),
+              Image.asset('assets/logo/logo.png'),
               const SizedBox(
-                height: 540,
+                height: 240,
               ),
               ElevatedButton(
                 style: ElevatedButton.styleFrom(
@@ -56,8 +55,10 @@ class LogInPage extends StatelessWidget {
                       width: 5, color: Color.fromRGBO(74, 85, 162, 1)),
                 ),
                 onPressed: () {
-                  Navigator.push(context,
-                      MaterialPageRoute(builder: (context) => const SignUpPage()));
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => const SignUpPage()));
                 },
                 child: const Text(
                   'Sign up',
