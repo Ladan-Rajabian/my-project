@@ -8,7 +8,6 @@ class LogInPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: const Color.fromARGB(255, 232, 237, 244),
       body: SafeArea(
         child: Center(
           child: Container(
@@ -29,34 +28,18 @@ class LogInPage extends StatelessWidget {
                 height: 220,
               ),
               ElevatedButton(
-                style: ElevatedButton.styleFrom(
-                    minimumSize: const Size.fromHeight(50),
-                    backgroundColor: const Color.fromRGBO(74, 85, 162, 1),
-                    shape: const RoundedRectangleBorder(
-                        borderRadius: BorderRadius.all(Radius.circular(20)))),
                 onPressed: () {
                   Navigator.push(context,
                       MaterialPageRoute(builder: (context) => const SignIn()));
                 },
                 child: const Text(
                   'Sign in',
-                  style: TextStyle(
-                    fontSize: 24,
-                    color: Colors.white,
-                  ),
                 ),
               ),
               const SizedBox(
                 height: 10,
               ),
               OutlinedButton(
-                style: OutlinedButton.styleFrom(
-                  minimumSize: const Size.fromHeight(50),
-                  shape: const RoundedRectangleBorder(
-                      borderRadius: BorderRadius.all(Radius.circular(20))),
-                  side: const BorderSide(
-                      width: 5, color: Color.fromRGBO(74, 85, 162, 1)),
-                ),
                 onPressed: () {
                   Navigator.push(
                       context,
@@ -65,10 +48,6 @@ class LogInPage extends StatelessWidget {
                 },
                 child: const Text(
                   'Sign up',
-                  style: TextStyle(
-                    fontSize: 24,
-                    color: Color.fromRGBO(74, 85, 162, 1),
-                  ),
                 ),
               )
             ]),
@@ -81,20 +60,19 @@ class LogInPage extends StatelessWidget {
 
 // Sign in Screen
 
-class SignIn extends StatelessWidget {
+class SignIn extends StatefulWidget {
   const SignIn({super.key});
+  @override
+  State<SignIn> createState() => _SignInState();
+}
 
+class _SignInState extends State<SignIn> {
+  bool isObscured = true;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         title: const Text('Sign in'),
-        backgroundColor: const Color.fromRGBO(74, 85, 162, 1),
-        shape: const RoundedRectangleBorder(
-          borderRadius: BorderRadius.only(
-              bottomLeft: Radius.circular(20),
-              bottomRight: Radius.circular(20)),
-        ),
       ),
       body: Container(
         padding: const EdgeInsets.only(left: 30, right: 30, top: 190),
@@ -107,10 +85,18 @@ class SignIn extends StatelessWidget {
             const SizedBox(
               height: 25,
             ),
-            const TextField(
-              obscureText: true,
+            TextField(
+              obscureText: isObscured,
               decoration: InputDecoration(
-                  border: OutlineInputBorder(), labelText: 'Password'),
+                  suffixIcon: IconButton(
+                      onPressed: () {
+                        setState(() {
+                          isObscured = !isObscured;
+                        });
+                      },
+                      icon: const Icon(Icons.remove_red_eye)),
+                  border: const OutlineInputBorder(),
+                  labelText: 'Password'),
             ),
             const SizedBox(
               height: 20,
