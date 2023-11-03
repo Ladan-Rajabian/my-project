@@ -1,5 +1,5 @@
-
 import 'package:flutter/material.dart';
+import 'package:gap/gap.dart';
 
 class HomeWidget extends StatelessWidget {
   const HomeWidget({super.key});
@@ -19,28 +19,50 @@ class HomeWidget extends StatelessWidget {
       body: Center(
         child: Column(
           children: [
-            const SizedBox(
-              height: 70,
-            ),
-            Card(
-              shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular((30))),
-              child: Container(
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(30),
-                  gradient: const LinearGradient(
-                    colors: [
-                      Color.fromRGBO(160, 191, 244, 0.5),
-                      Color.fromRGBO(197, 223, 248, 1)
-                    ],
-                    begin: Alignment.topLeft,
-                    end: Alignment.bottomRight,
-                  ),
-                ),
-                height: 153,
-                width: 350,
-              ),
-            ),
+            const Gap(50),
+            SizedBox(
+                height: 200,
+                width: 390,
+                child: Stack(
+                  alignment: Alignment.center,
+                  children: [
+                    Container(
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(30),
+                        gradient: const LinearGradient(
+                          colors: [
+                            Color.fromRGBO(160, 191, 244, 0.5),
+                            Color.fromRGBO(197, 223, 248, 1)
+                          ],
+                          begin: Alignment.topLeft,
+                          end: Alignment.bottomRight,
+                        ),
+                      ),
+                      height: 153,
+                      width: 350,
+                    ),
+                    Align(
+                      alignment: Alignment.topLeft,
+                      child: Container(
+                          height: 100,
+                          width: 100,
+                          decoration: BoxDecoration(
+                              image: const DecorationImage(
+                                  image: AssetImage(
+                                      'assets/image/recipescard.png')),
+                              borderRadius: BorderRadius.circular(500),
+                              color: Colors.black)),
+                    ),
+                    Container(
+                      margin: const EdgeInsets.only(left: 100),
+                      child: const Text(
+                        'Recipes',
+                        style: TextStyle(
+                            fontSize: 28, fontWeight: FontWeight.w600),
+                      ),
+                    )
+                  ],
+                )),
             const SizedBox(
               height: 40,
             ),
