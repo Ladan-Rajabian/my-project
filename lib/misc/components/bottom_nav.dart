@@ -1,7 +1,5 @@
-
 import 'package:flutter/material.dart';
 import 'package:flutter_untiteld/home/home_page.dart';
-
 
 class BottomNavigation extends StatefulWidget {
   const BottomNavigation({super.key});
@@ -25,6 +23,7 @@ class _BottomNavigationState extends State<BottomNavigation> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: const Color.fromARGB(255, 232, 237, 244),
       body: Center(
         child: _widgetOptions.elementAt(_selectedIndex),
       ),

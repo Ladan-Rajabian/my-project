@@ -1,8 +1,5 @@
-
 import 'package:flutter/material.dart';
 import 'package:flutter_untiteld/home/home_page.dart';
-
-
 
 class SignUpPage extends StatelessWidget {
   const SignUpPage({super.key});
@@ -10,6 +7,7 @@ class SignUpPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: const Color.fromARGB(255, 232, 237, 244),
       appBar: AppBar(
         title: const Text('Create an account'),
         backgroundColor: const Color.fromRGBO(74, 85, 162, 1),

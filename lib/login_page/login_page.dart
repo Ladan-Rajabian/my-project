@@ -8,6 +8,7 @@ class LogInPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: const Color.fromARGB(255, 232, 237, 244),
       body: SafeArea(
         child: Center(
           child: Container(
@@ -48,6 +49,7 @@ class LogInPage extends StatelessWidget {
                 },
                 child: const Text(
                   'Sign up',
+                  style: TextStyle(color: Color.fromRGBO(74, 85, 162, 1)),
                 ),
               )
             ]),
@@ -71,6 +73,7 @@ class _SignInState extends State<SignIn> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: const Color.fromARGB(255, 232, 237, 244),
       appBar: AppBar(
         title: const Text('Sign in'),
       ),
