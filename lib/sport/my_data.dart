@@ -9,8 +9,6 @@ class MyData extends StatefulWidget {
 }
 
 class _MyDataState extends State<MyData> {
-  int? _value = 1;
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -18,24 +16,60 @@ class _MyDataState extends State<MyData> {
       appBar: AppBar(
         title: const Text('My data'),
       ),
-      body: Center(
-        child: Column(
-          children: [
-           const Gap(50),
-            Wrap(
-              children: List<Widget>.generate(2, (int index) {
-                return ChoiceChip(
-                  label: const Text('Kg/Cm'),
-                  selected: _value == index,
-                  onSelected: (bool selected) {
-                    setState(() {
-                      _value = selected ? index : null;
-                    });
-                  },
-                );
-              }),
-            )
-          ],
+      body: Padding(
+        padding: const EdgeInsets.all(20),
+        child: Center(
+          child: Column(
+            children: [
+              const Gap(50),
+              Container(
+                height: 50,
+                width: 300,
+                decoration: const BoxDecoration(
+                    color: Color.fromRGBO(74, 85, 162, 1),
+                    borderRadius: BorderRadius.all(Radius.circular(30))),
+                alignment: Alignment.center,
+                child: const Text(
+                  'Kg / Cm',
+                  style: TextStyle(color: Colors.white, fontSize: 20),
+                ),
+              ),
+              const Gap(80),
+              const Padding(
+                padding: EdgeInsets.all(15),
+                child: Row(
+                  children: [
+                    Text(
+                      'Height',
+                      style:
+                          TextStyle(fontSize: 26, fontWeight: FontWeight.w500),
+                    ),
+                    Gap(190),
+                    SizedBox(
+                      width: 60,
+                      child: TextField(style: TextStyle(fontSize: 20)),
+                    ),
+                    Text('Cm')
+                  ],
+                ),
+              ),
+              const Padding(
+                padding: EdgeInsets.all(15),
+                child: Row(children: [
+                  Text(
+                    'Weight',
+                    style: TextStyle(fontSize: 26, fontWeight: FontWeight.w500),
+                  ),
+                  Gap(190),
+                  SizedBox(
+                    width: 60,
+                    child: TextField(style: TextStyle(fontSize: 20)),
+                  ),
+                  Text('Kg')
+                ]),
+              ),
+            ],
+          ),
         ),
       ),
     );
