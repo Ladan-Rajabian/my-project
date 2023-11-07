@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_untiteld/sport/evey_single_exercise.dart';
 import 'package:gap/gap.dart';
 
 class Exercises extends StatelessWidget {
@@ -31,7 +32,7 @@ class Exercises extends StatelessWidget {
                                   .withOpacity(0.60),
                               const Color.fromRGBO(74, 85, 162, 1),
                             ],
-                            begin: Alignment.topCenter,
+                            begin: Alignment.topLeft,
                             end: Alignment.bottomRight,
                           ),
                         ),
@@ -56,11 +57,18 @@ class Exercises extends StatelessWidget {
                         child: const Text(
                           'Legs workout',
                           style: TextStyle(
-                              fontSize: 20, fontWeight: FontWeight.w300),
+                              fontSize: 20, fontWeight: FontWeight.w500),
                         ),
-                      )
+                      ),
                     ],
                   ),
+                  onTap: () {
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => const Exercise1(),
+                        ));
+                  },
                 ),
                 Column(
                   children: [
@@ -79,7 +87,7 @@ class Exercises extends StatelessWidget {
                                       .withOpacity(0.60),
                                   const Color.fromRGBO(74, 85, 162, 1),
                                 ],
-                                begin: Alignment.topCenter,
+                                begin: Alignment.topLeft,
                                 end: Alignment.bottomRight,
                               ),
                             ),
@@ -93,7 +101,7 @@ class Exercises extends StatelessWidget {
                               child: const Text(
                                 'Abs workout',
                                 style: TextStyle(
-                                    fontSize: 20, fontWeight: FontWeight.w300),
+                                    fontSize: 20, fontWeight: FontWeight.w500),
                               ),
                             ),
                           ),
@@ -109,6 +117,13 @@ class Exercises extends StatelessWidget {
                                   color: Colors.black)),
                         ],
                       ),
+                      onTap: () {
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => const Exercise2(),
+                            ));
+                      },
                     )
                   ],
                 ),
@@ -131,7 +146,7 @@ class Exercises extends StatelessWidget {
                                   .withOpacity(0.60),
                               const Color.fromRGBO(74, 85, 162, 1),
                             ],
-                            begin: Alignment.topCenter,
+                            begin: Alignment.topLeft,
                             end: Alignment.bottomRight,
                           ),
                         ),
@@ -156,11 +171,18 @@ class Exercises extends StatelessWidget {
                         child: const Text(
                           'Glute workout',
                           style: TextStyle(
-                              fontSize: 20, fontWeight: FontWeight.w300),
+                              fontSize: 20, fontWeight: FontWeight.w500),
                         ),
                       )
                     ],
                   ),
+                  onTap: () {
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => const Exercise3(),
+                        ));
+                  },
                 ),
                 Column(
                   children: [
@@ -179,7 +201,7 @@ class Exercises extends StatelessWidget {
                                       .withOpacity(0.60),
                                   const Color.fromRGBO(74, 85, 162, 1),
                                 ],
-                                begin: Alignment.topCenter,
+                                begin: Alignment.topLeft,
                                 end: Alignment.bottomRight,
                               ),
                             ),
@@ -193,7 +215,7 @@ class Exercises extends StatelessWidget {
                               child: const Text(
                                 'Full body',
                                 style: TextStyle(
-                                    fontSize: 20, fontWeight: FontWeight.w300),
+                                    fontSize: 20, fontWeight: FontWeight.w500),
                               ),
                             ),
                           ),
@@ -209,6 +231,13 @@ class Exercises extends StatelessWidget {
                                   color: Colors.black)),
                         ],
                       ),
+                      onTap: () {
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => const Exercise4(),
+                            ));
+                      },
                     )
                   ],
                 ),
@@ -229,7 +258,7 @@ class Exercises extends StatelessWidget {
                               .withOpacity(0.60),
                           const Color.fromRGBO(74, 85, 162, 1),
                         ],
-                        begin: Alignment.topCenter,
+                        begin: Alignment.topLeft,
                         end: Alignment.bottomRight,
                       ),
                     ),
@@ -253,11 +282,18 @@ class Exercises extends StatelessWidget {
                     child: const Text(
                       'Legs workout',
                       style:
-                          TextStyle(fontSize: 20, fontWeight: FontWeight.w300),
+                          TextStyle(fontSize: 20, fontWeight: FontWeight.w500),
                     ),
                   )
                 ],
               ),
+              onTap: () {
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => const Exercise5(),
+                    ));
+              },
             ),
             Column(
               children: [
@@ -276,7 +312,7 @@ class Exercises extends StatelessWidget {
                                   .withOpacity(0.60),
                               const Color.fromRGBO(74, 85, 162, 1),
                             ],
-                            begin: Alignment.topCenter,
+                            begin: Alignment.topLeft,
                             end: Alignment.bottomRight,
                           ),
                         ),
@@ -290,7 +326,7 @@ class Exercises extends StatelessWidget {
                           child: const Text(
                             'Full body',
                             style: TextStyle(
-                                fontSize: 20, fontWeight: FontWeight.w300),
+                                fontSize: 20, fontWeight: FontWeight.w500),
                           ),
                         ),
                       ),
@@ -306,6 +342,13 @@ class Exercises extends StatelessWidget {
                               color: Colors.black)),
                     ],
                   ),
+                  onTap: () {
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => const Exercise6(),
+                        ));
+                  },
                 )
               ],
             ),
@@ -324,7 +367,7 @@ class Exercises extends StatelessWidget {
                               .withOpacity(0.60),
                           const Color.fromRGBO(74, 85, 162, 1),
                         ],
-                        begin: Alignment.topCenter,
+                        begin: Alignment.topLeft,
                         end: Alignment.bottomRight,
                       ),
                     ),
@@ -349,11 +392,18 @@ class Exercises extends StatelessWidget {
                     child: const Text(
                       'Lower Abs',
                       style:
-                          TextStyle(fontSize: 20, fontWeight: FontWeight.w300),
+                          TextStyle(fontSize: 20, fontWeight: FontWeight.w500),
                     ),
                   )
                 ],
               ),
+              onTap: () {
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => const Exercise7(),
+                    ));
+              },
             ),
             Column(
               children: [
@@ -372,7 +422,7 @@ class Exercises extends StatelessWidget {
                                   .withOpacity(0.60),
                               const Color.fromRGBO(74, 85, 162, 1),
                             ],
-                            begin: Alignment.topCenter,
+                            begin: Alignment.topLeft,
                             end: Alignment.bottomRight,
                           ),
                         ),
@@ -386,7 +436,7 @@ class Exercises extends StatelessWidget {
                           child: const Text(
                             'Full body',
                             style: TextStyle(
-                                fontSize: 20, fontWeight: FontWeight.w300),
+                                fontSize: 20, fontWeight: FontWeight.w500),
                           ),
                         ),
                       ),
@@ -402,6 +452,13 @@ class Exercises extends StatelessWidget {
                               color: Colors.black)),
                     ],
                   ),
+                  onTap: () {
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => const Exercise8(),
+                        ));
+                  },
                 )
               ],
             ),
@@ -420,7 +477,7 @@ class Exercises extends StatelessWidget {
                               .withOpacity(0.60),
                           const Color.fromRGBO(74, 85, 162, 1),
                         ],
-                        begin: Alignment.topCenter,
+                        begin: Alignment.topLeft,
                         end: Alignment.bottomRight,
                       ),
                     ),
@@ -445,11 +502,18 @@ class Exercises extends StatelessWidget {
                     child: const Text(
                       'Glute workout',
                       style:
-                          TextStyle(fontSize: 20, fontWeight: FontWeight.w300),
+                          TextStyle(fontSize: 20, fontWeight: FontWeight.w500),
                     ),
                   )
                 ],
               ),
+                 onTap: () {
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => const Exercise9(),
+                    ));
+              },
             ),
             Column(
               children: [
@@ -468,7 +532,7 @@ class Exercises extends StatelessWidget {
                                   .withOpacity(0.60),
                               const Color.fromRGBO(74, 85, 162, 1),
                             ],
-                            begin: Alignment.topCenter,
+                            begin: Alignment.topLeft,
                             end: Alignment.bottomRight,
                           ),
                         ),
@@ -482,7 +546,7 @@ class Exercises extends StatelessWidget {
                           child: const Text(
                             'Lower Abs',
                             style: TextStyle(
-                                fontSize: 20, fontWeight: FontWeight.w300),
+                                fontSize: 20, fontWeight: FontWeight.w500),
                           ),
                         ),
                       ),
@@ -498,6 +562,13 @@ class Exercises extends StatelessWidget {
                               color: Colors.black)),
                     ],
                   ),
+                        onTap: () {
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => const Exercise10(),
+                    ));
+              },
                 )
               ],
             ),
@@ -516,7 +587,7 @@ class Exercises extends StatelessWidget {
                               .withOpacity(0.60),
                           const Color.fromRGBO(74, 85, 162, 1),
                         ],
-                        begin: Alignment.topCenter,
+                        begin: Alignment.topLeft,
                         end: Alignment.bottomRight,
                       ),
                     ),
@@ -541,11 +612,18 @@ class Exercises extends StatelessWidget {
                     child: const Text(
                       'Legs workout',
                       style:
-                          TextStyle(fontSize: 20, fontWeight: FontWeight.w300),
+                          TextStyle(fontSize: 20, fontWeight: FontWeight.w500),
                     ),
                   )
                 ],
               ),
+                    onTap: () {
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => const Exercise11(),
+                    ));
+              },
             ),
             Column(
               children: [
@@ -565,7 +643,7 @@ class Exercises extends StatelessWidget {
                                   .withOpacity(0.60),
                               const Color.fromRGBO(74, 85, 162, 1),
                             ],
-                            begin: Alignment.topCenter,
+                            begin: Alignment.topLeft,
                             end: Alignment.bottomRight,
                           ),
                         ),
@@ -579,7 +657,7 @@ class Exercises extends StatelessWidget {
                           child: const Text(
                             'Full body',
                             style: TextStyle(
-                                fontSize: 20, fontWeight: FontWeight.w300),
+                                fontSize: 20, fontWeight: FontWeight.w500),
                           ),
                         ),
                       ),
@@ -595,6 +673,13 @@ class Exercises extends StatelessWidget {
                               color: Colors.black)),
                     ],
                   ),
+                        onTap: () {
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => const Exercise12(),
+                    ));
+              },
                 )
               ],
             ),

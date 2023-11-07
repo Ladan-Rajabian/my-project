@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_untiteld/sport/exercises.dart';
+import 'package:flutter_untiteld/sport/my_data.dart';
 import 'package:gap/gap.dart';
 
 class SportExercise extends StatelessWidget {
@@ -100,6 +101,13 @@ class SportExercise extends StatelessWidget {
                           style: TextStyle(
                               fontSize: 24, fontWeight: FontWeight.w800)),
                     )),
+                        onTap: () {
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => const MyData(),
+                          ));
+                    },
               ),
             ],
           ),
