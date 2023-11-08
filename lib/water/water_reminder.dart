@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_untiteld/water/overview.dart';
+import 'package:flutter_untiteld/water/settings_page.dart';
+import 'package:flutter_untiteld/widgets/healthy_inkwell.dart';
 import 'package:gap/gap.dart';
 
 class WaterReminder extends StatelessWidget {
@@ -21,50 +24,26 @@ class WaterReminder extends StatelessWidget {
             child: Center(
               child: Column(children: [
                 const Gap(120),
+                
                 InkWell(
-                  child: Container(
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(30),
-                        gradient: const LinearGradient(
-                          colors: [
-                            Color.fromRGBO(0, 158, 255, 1),
-                            Color.fromRGBO(0, 231, 255, 0.25)
-                          ],
-                          begin: Alignment.topLeft,
-                          end: Alignment.bottomRight,
-                        ),
-                      ),
-                      height: 153,
-                      width: 350,
-                      child: Container(
-                        margin: const EdgeInsets.only(left: 60, top: 60),
-                        child: const Text('Setting',
-                            style: TextStyle(
-                                fontSize: 24, fontWeight: FontWeight.w800)),
-                      )),
+                  child:const  HealthyContainer(text: 'Setting',),
+                  onTap: () {
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => const Setting(),
+                        ));
+                  },
                 ),
                 const Gap(120),
                 InkWell(
-                  child: Container(
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(30),
-                        gradient: const LinearGradient(
-                          colors: [
-                            Color.fromRGBO(0, 158, 255, 1),
-                            Color.fromRGBO(0, 231, 255, 0.25)
-                          ],
-                          begin: Alignment.topLeft,
-                          end: Alignment.bottomRight,
-                        ),
-                      ),
-                      height: 153,
-                      width: 350,
-                      child: Container(
-                        margin: const EdgeInsets.only(left: 60, top: 60),
-                        child: const Text('Overview',
-                            style: TextStyle(
-                                fontSize: 24, fontWeight: FontWeight.w800)),
-                      )),
+                  child: const HealthyContainer(text: 'Overview',),
+                  onTap: (){
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(builder: (context) => const OverView(),
+                      ));
+                  },
                 ),
               ]),
             )));

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_untiteld/widgets/healthy_row.dart';
 import 'package:gap/gap.dart';
 
 class MyData extends StatefulWidget {
@@ -36,38 +37,11 @@ class _MyDataState extends State<MyData> {
               ),
               const Gap(80),
               const Padding(
-                padding: EdgeInsets.all(15),
-                child: Row(
-                  children: [
-                    Text(
-                      'Height',
-                      style:
-                          TextStyle(fontSize: 26, fontWeight: FontWeight.w500),
-                    ),
-                    Gap(190),
-                    SizedBox(
-                      width: 60,
-                      child: TextField(style: TextStyle(fontSize: 20)),
-                    ),
-                    Text('Cm')
-                  ],
-                ),
-              ),
+                  padding: EdgeInsets.all(15),
+                  child: HealthyRow(name: 'Height', abbreviation: 'Cm')),
               const Padding(
-                padding: EdgeInsets.all(15),
-                child: Row(children: [
-                  Text(
-                    'Weight',
-                    style: TextStyle(fontSize: 26, fontWeight: FontWeight.w500),
-                  ),
-                  Gap(190),
-                  SizedBox(
-                    width: 60,
-                    child: TextField(style: TextStyle(fontSize: 20)),
-                  ),
-                  Text('Kg')
-                ]),
-              ),
+                  padding: EdgeInsets.all(15),
+                  child: HealthyRow(name: 'Weight', abbreviation: 'Kg')),
             ],
           ),
         ),
