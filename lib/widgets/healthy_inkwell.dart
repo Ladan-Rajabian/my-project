@@ -6,6 +6,7 @@ class HealthyCard extends StatefulWidget {
   final String imagePath;
   final String description;
 
+
   const HealthyCard(
       {super.key, required this.imagePath, required this.description});
   @override
@@ -69,15 +70,14 @@ class _HealthyCardState extends State<HealthyCard> {
 //water container card
 
 class HealthyContainer extends StatefulWidget {
-
   final String text;
 
   const HealthyContainer({super.key, required this.text});
   @override
   State<HealthyContainer> createState() => _HealthyContainerState();
 }
-class _HealthyContainerState extends State<HealthyContainer> {
 
+class _HealthyContainerState extends State<HealthyContainer> {
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -97,7 +97,8 @@ class _HealthyContainerState extends State<HealthyContainer> {
         child: Container(
           margin: const EdgeInsets.only(left: 60, top: 60),
           child: Text(widget.text,
-              style:const TextStyle(fontSize: 24, fontWeight: FontWeight.w800)),
+              style:
+                  const TextStyle(fontSize: 24, fontWeight: FontWeight.w800)),
         ));
   }
 }

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_untiteld/recipes/recipes.dart';
 import 'package:flutter_untiteld/sport/sport.dart';
 import 'package:flutter_untiteld/water/water_reminder.dart';
 import 'package:gap/gap.dart';
@@ -28,20 +29,29 @@ class HomeWidget extends StatelessWidget {
                 child: Stack(
                   alignment: Alignment.center,
                   children: [
-                    Container(
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(30),
-                        gradient: const LinearGradient(
-                          colors: [
-                            Color.fromRGBO(160, 191, 244, 0.5),
-                            Color.fromRGBO(197, 223, 248, 1)
-                          ],
-                          begin: Alignment.topLeft,
-                          end: Alignment.bottomRight,
+                    InkWell(
+                      child: Container(
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(30),
+                          gradient: const LinearGradient(
+                            colors: [
+                              Color.fromRGBO(160, 191, 244, 0.5),
+                              Color.fromRGBO(197, 223, 248, 1)
+                            ],
+                            begin: Alignment.topLeft,
+                            end: Alignment.bottomRight,
+                          ),
                         ),
+                        height: 153,
+                        width: 350,
                       ),
-                      height: 153,
-                      width: 350,
+                            onTap: () {
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => const MyRecipes(),
+                          ));
+                    },
                     ),
                     Align(
                       alignment: Alignment.topLeft,
