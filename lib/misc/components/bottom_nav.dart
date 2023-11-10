@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_untiteld/home/home_page.dart';
+import 'package:flutter_untiteld/home/profile.dart';
 
 class BottomNavigation extends StatefulWidget {
   const BottomNavigation({super.key});
@@ -10,8 +11,8 @@ class BottomNavigation extends StatefulWidget {
 class _BottomNavigationState extends State<BottomNavigation> {
   int _selectedIndex = 0;
   static const List<Widget> _widgetOptions = <Widget>[
-    Text('profile'),
     HomeWidget(),
+    ProfilePage(),
     Text('Favourite'),
   ];
   void _onItemTapp(int index) {
@@ -30,12 +31,12 @@ class _BottomNavigationState extends State<BottomNavigation> {
       bottomNavigationBar: BottomNavigationBar(
         items: const <BottomNavigationBarItem>[
           BottomNavigationBarItem(
-              icon: Icon(Icons.person),
-              label: 'Profile',
-              backgroundColor: Color.fromARGB(255, 74, 85, 162)),
-          BottomNavigationBarItem(
               icon: Icon(Icons.home_filled),
               label: 'Home',
+              backgroundColor: Color.fromARGB(255, 74, 85, 162)),
+          BottomNavigationBarItem(
+              icon: Icon(Icons.person),
+              label: 'Profile',
               backgroundColor: Color.fromARGB(255, 74, 85, 162)),
           BottomNavigationBarItem(
               icon: Icon(Icons.favorite),
