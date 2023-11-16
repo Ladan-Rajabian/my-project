@@ -13,6 +13,13 @@ class ProfilePage extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: const Text('Profile'),
+        actions: [
+          PopupMenuButton(itemBuilder: (BuildContext context) {
+            return {'Log out'}.map((String choice) {
+              return PopupMenuItem(value: choice, child: Text(choice));
+            }).toList();
+          }),
+        ],
       ),
       body: Container(
         decoration: BoxDecoration(
