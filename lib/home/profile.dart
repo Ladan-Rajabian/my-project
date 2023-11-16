@@ -1,6 +1,9 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 
 import 'package:gap/gap.dart';
+import 'package:image_picker/image_picker.dart';
 
 class ProfilePage extends StatelessWidget {
   const ProfilePage({super.key});
@@ -65,7 +68,6 @@ class ProfilePage extends StatelessWidget {
           right: 20,
           child: InkWell(
             onTap: () {
-              print('object');
               showModalBottomSheet<void>(
                 showDragHandle: true,
                 context: context,
@@ -87,54 +89,79 @@ class ProfilePage extends StatelessWidget {
 
   Widget bottomSheet() {
     return Container(
-      height: 200,
+      height: 150,
       margin: const EdgeInsets.symmetric(
         horizontal: 20,
         vertical: 20,
       ),
-      child: Column(
+      child: const Column(
         children: [
-          const Text(
+          Text(
             'Choose profile photo',
             style: TextStyle(fontSize: 20),
           ),
-          const Gap(20),
+          Gap(20),
           Expanded(
             child: Row(
               mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Expanded(
-                  child: ElevatedButton(
-                    onPressed: () {},
-                    child: Row(
-                      children: [
-                        const Icon(Icons.camera),
-                        Container(
-                          margin: const EdgeInsets.only(left: 8),
-                          child: const Text('Camera'),
-                        )
-                      ],
-                    ),
-                  ),
-                ),
-                Expanded(
-                  child: ElevatedButton(
-                      onPressed: () {},
-                      child: Row(
-                        children: [
-                          const Icon(Icons.photo_album),
-                          Container(
-                            margin: const EdgeInsets.only(left: 8),
-                            child: const Text('Gallery'),
-                          )
-                        ],
-                      )),
-                )
-              ],
+              children: [MyPickerImage()],
             ),
           )
         ],
       ),
+    );
+  }
+}
+
+class MyPickerImage extends StatefulWidget {
+  const MyPickerImage({super.key});
+
+  @override
+  State<MyPickerImage> createState() => _MyPickerImageState();
+}
+
+class _MyPickerImageState extends State<MyPickerImage> {
+  String imagePath = '';
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      children: [
+        Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            IconButton(
+                onPressed: () async {
+                  final image =
+                      await ImagePicker().pickImage(source: ImageSource.camera);
+                  setState(() {
+                    imagePath = image?.path ?? "";
+                  });
+                },
+                icon: const Icon(Icons.camera_alt)),
+            IconButton(
+              onPressed: () async {
+                final image =
+                    await ImagePicker().pickImage(source: ImageSource.gallery);
+                setState(() {
+                  imagePath = image?.path ?? "";
+                });
+              },
+              icon: const Icon(Icons.photo_album),
+            ),
+          ],
+        ),
+        Container(
+          padding: const EdgeInsets.all(16.0),
+          child: imagePath.isNotEmpty
+              ? Image.file(
+                  (File(imagePath)),
+                  height: 300.0,
+                  width: 300.0,
+                  fit: BoxFit.cover,
+                )
+              : const Text('No Photo Selected yet'),
+        ),
+      ],
     );
   }
 }
