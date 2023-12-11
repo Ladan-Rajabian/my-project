@@ -1,7 +1,21 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_untiteld/firebase_options.dart';
 import 'package:flutter_untiteld/login_page/login_page.dart';
+import 'package:firebase_core/firebase_core.dart';
+import 'firebase_options.dart';
+import 'package:firebase_analytics/firebase_analytics.dart';
 
-void main() {
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  try {
+    await Firebase.initializeApp(
+      options: DefaultFirebaseOptions.currentPlatform,
+    );
+
+    FirebaseAnalytics.instance.setAnalyticsCollectionEnabled(true);
+  } catch (e) {
+    print("Failed to initialize Firebase: $e");
+  }
   runApp(const MyApp());
 }
 

@@ -145,6 +145,7 @@ class _MyPickerImageState extends State<MyPickerImage> {
                   });
                 },
                 icon: const Icon(Icons.camera_alt)),
+            const Gap(20),
             IconButton(
               onPressed: () async {
                 final image =

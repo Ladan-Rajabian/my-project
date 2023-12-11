@@ -2,12 +2,14 @@ import 'package:flutter/material.dart';
 
 
 
-class MyHomePage extends StatefulWidget {
+class MyTimePicker extends StatefulWidget {
+  const MyTimePicker({super.key});
+
   @override
-  _MyHomePageState createState() => _MyHomePageState();
+  _MyTimePickerState createState() => _MyTimePickerState();
 }
 
-class _MyHomePageState extends State<MyHomePage> {
+class _MyTimePickerState extends State<MyTimePicker> {
   TimeOfDay _selectedTime = TimeOfDay.now();
 
   Future<void> _selectTime(BuildContext context) async {

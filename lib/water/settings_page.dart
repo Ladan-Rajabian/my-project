@@ -87,7 +87,9 @@ class _SettingState extends State<Setting> {
                   style: TextStyle(fontSize: 18, fontWeight: FontWeight.w500),
                 ),
                 Gap(225),
-                HealthySwitch(),
+                HealthySwitch(
+                   
+                ),
               ],
             ),
           ],

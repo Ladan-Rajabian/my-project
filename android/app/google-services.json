@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "1082866843624",
+    "project_id": "healthy-way-app-4bcab",
+    "storage_bucket": "healthy-way-app-4bcab.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1082866843624:android:a35fa763854531efd3ee5d",
+        "android_client_info": {
+          "package_name": "com.example.flutter_untiteld"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCmGwTRNJz8wEoulEvdnOWbZHYSbg8bUFE"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
