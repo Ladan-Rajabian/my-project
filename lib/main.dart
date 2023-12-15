@@ -4,6 +4,7 @@ import 'package:flutter_untiteld/login_page/login_page.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'firebase_options.dart';
 import 'package:firebase_analytics/firebase_analytics.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -16,11 +17,14 @@ void main() async {
   } catch (e) {
     print("Failed to initialize Firebase: $e");
   }
-  runApp(const MyApp());
+  runApp( MyApp());
 }
 
 class MyApp extends StatelessWidget {
-  const MyApp({super.key});
+  final FirebaseAnalytics analytics = FirebaseAnalytics.instance;
+
+  MyApp({super.key});
+  
 
   @override
   Widget build(BuildContext context) {
@@ -56,7 +60,8 @@ class MyApp extends StatelessWidget {
               )),
         ),
       ),
-      home: const LogInPage(),
+      navigatorObservers: [FirebaseAnalyticsObserver(analytics: analytics)],
+      home: LogInPage(),
     );
   }
 }

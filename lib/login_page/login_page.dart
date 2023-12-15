@@ -1,9 +1,20 @@
+import 'package:firebase_analytics/firebase_analytics.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_untiteld/misc/components/bottom_nav.dart';
 import 'package:flutter_untiteld/signup/signup_page.dart';
 
 class LogInPage extends StatelessWidget {
-  const LogInPage({super.key});
+    LogInPage({super.key});
+  final FirebaseAnalytics analytics = FirebaseAnalytics.instance;
+
+
+
+  Future<void> logLoginEvent() async {
+    await analytics.logEvent(
+      name: 'login',
+      parameters: {'login_method': 'email'},
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -29,9 +40,10 @@ class LogInPage extends StatelessWidget {
                 height: 220,
               ),
               ElevatedButton(
-                onPressed: () {
-                  Navigator.push(context,
-                      MaterialPageRoute(builder: (context) => const SignIn()));
+                onPressed: () async {
+                 logLoginEvent().then((value) => Navigator.push(context,
+                      MaterialPageRoute(builder: (context) => const SignIn())));
+                  
                 },
                 child: const Text(
                   'Sign in',
