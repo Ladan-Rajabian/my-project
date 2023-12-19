@@ -1,7 +1,7 @@
 import 'package:firebase_analytics/firebase_analytics.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_untiteld/misc/components/bottom_nav.dart';
-import 'package:flutter_untiteld/signup/signup_page.dart';
+import 'package:flutter_untiteld/widgets/bottom_nav.dart';
+import 'package:flutter_untiteld/login_page/signup/signup_page.dart';
 
 class LogInPage extends StatelessWidget {
     LogInPage({super.key});

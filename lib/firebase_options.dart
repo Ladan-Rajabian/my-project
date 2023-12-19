@@ -17,7 +17,10 @@ import 'package:flutter/foundation.dart'
 class DefaultFirebaseOptions {
   static FirebaseOptions get currentPlatform {
     if (kIsWeb) {
-      return web;
+      throw UnsupportedError(
+        'DefaultFirebaseOptions have not been configured for web - '
+        'you can reconfigure this by running the FlutterFire CLI again.',
+      );
     }
     switch (defaultTargetPlatform) {
       case TargetPlatform.android:
@@ -25,7 +28,10 @@ class DefaultFirebaseOptions {
       case TargetPlatform.iOS:
         return ios;
       case TargetPlatform.macOS:
-        return macos;
+        throw UnsupportedError(
+          'DefaultFirebaseOptions have not been configured for macos - '
+          'you can reconfigure this by running the FlutterFire CLI again.',
+        );
       case TargetPlatform.windows:
         throw UnsupportedError(
           'DefaultFirebaseOptions have not been configured for windows - '
@@ -43,16 +49,6 @@ class DefaultFirebaseOptions {
     }
   }
 
-  static const FirebaseOptions web = FirebaseOptions(
-    apiKey: 'AIzaSyA9ImvjAILCgz-Pp2QRgsF4N9d8Qoqo_bM',
-    appId: '1:1082866843624:web:51f1d446c570ee80d3ee5d',
-    messagingSenderId: '1082866843624',
-    projectId: 'healthy-way-app-4bcab',
-    authDomain: 'healthy-way-app-4bcab.firebaseapp.com',
-    storageBucket: 'healthy-way-app-4bcab.appspot.com',
-    measurementId: 'G-2EMYWSG4D0',
-  );
-
   static const FirebaseOptions android = FirebaseOptions(
     apiKey: 'AIzaSyCmGwTRNJz8wEoulEvdnOWbZHYSbg8bUFE',
     appId: '1:1082866843624:android:a35fa763854531efd3ee5d',
@@ -63,19 +59,11 @@ class DefaultFirebaseOptions {
 
   static const FirebaseOptions ios = FirebaseOptions(
     apiKey: 'AIzaSyBEqRogKGWA07YlrRprMtdLgYr6X7roLp4',
-    appId: '1:1082866843624:ios:a829b0396388702cd3ee5d',
+    appId: '1:1082866843624:ios:7b7e1654a7897c94d3ee5d',
     messagingSenderId: '1082866843624',
     projectId: 'healthy-way-app-4bcab',
     storageBucket: 'healthy-way-app-4bcab.appspot.com',
-    iosBundleId: 'com.example.flutterUntiteld',
-  );
-
-  static const FirebaseOptions macos = FirebaseOptions(
-    apiKey: 'AIzaSyBEqRogKGWA07YlrRprMtdLgYr6X7roLp4',
-    appId: '1:1082866843624:ios:e35eb855e1d48b35d3ee5d',
-    messagingSenderId: '1082866843624',
-    projectId: 'healthy-way-app-4bcab',
-    storageBucket: 'healthy-way-app-4bcab.appspot.com',
-    iosBundleId: 'com.example.flutterUntiteld.RunnerTests',
+    iosClientId: '1082866843624-5ivn2go9ns8jscc7dm0genttvklu5ejp.apps.googleusercontent.com',
+    iosBundleId: 'com.example.weatherApp',
   );
 }
