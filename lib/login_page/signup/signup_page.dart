@@ -1,7 +1,6 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_untiteld/home/home_page.dart';
-
+import 'package:flutter_untiteld/widgets/bottom_nav.dart';
 import 'package:flutter_untiteld/widgets/healthy_signup.dart';
 import 'package:gap/gap.dart';
 import 'package:google_sign_in/google_sign_in.dart';
@@ -62,7 +61,7 @@ class SignUpPage extends StatelessWidget {
             ),
           ),
           const SizedBox(
-            height: 50,
+            height: 80,
           ),
           ElevatedButton(
             style: ElevatedButton.styleFrom(
@@ -71,8 +70,10 @@ class SignUpPage extends StatelessWidget {
                 shape: const RoundedRectangleBorder(
                     borderRadius: BorderRadius.all(Radius.circular(20)))),
             onPressed: () {
-              Navigator.push(context,
-                  MaterialPageRoute(builder: (context) => const HomeWidget()));
+              Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                      builder: (context) => const BottomNavigation()));
             },
             child: const Text(
               'Sign up',
@@ -111,25 +112,13 @@ class SignUpPage extends StatelessWidget {
               ],
             ),
           ),
-          const Gap(40),
+          const Gap(80),
           InkWell(
+            onTap: signInWithGoogle,
             child: const SignupButton(
-                title: 'Continue with Apple', icon: Icons.apple),
-            onTap: () {},
-          ),
-          const Gap(20),
-          InkWell(
-            child: SignupButton(
               title: 'Continue with Google',
               icon: Icons.g_mobiledata,
             ),
-            onTap: signInWithGoogle,
-          ),
-          const Gap(20),
-          InkWell(
-            child: const SignupButton(
-                title: 'Continue with Facebook', icon: Icons.facebook),
-            onTap: () {},
           ),
         ]),
       ),
