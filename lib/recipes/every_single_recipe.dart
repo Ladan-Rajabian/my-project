@@ -42,10 +42,10 @@ class _HealthyRecipeWidgetState extends State<HealthyRecipeWidget> {
                       children: [
                         const Text('Serve:'),
                         Text(widget.serve),
-                        const Gap(110),
+                        const Gap(90),
                         const Text('Cook: '),
                         Text(widget.cookTime),
-                        const Gap(110),
+                        const Gap(100),
                         const Icon(Icons.favorite_outline_outlined)
                       ],
                     ),

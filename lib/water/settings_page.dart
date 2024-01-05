@@ -31,65 +31,70 @@ class Setting extends StatefulWidget {
 class _SettingState extends State<Setting> {
   @override
   Widget build(BuildContext context) {
+    Size size = MediaQuery.of(context).size;
     return Scaffold(
       backgroundColor: const Color.fromARGB(255, 232, 237, 244),
       appBar: AppBar(
         title: const Text('Setting'),
       ),
-      body: const Padding(
-        padding: EdgeInsets.all(15),
+      body: Padding(
+        padding: const EdgeInsets.all(15),
         child: Column(
           children: [
-            Gap(50),
+            const Gap(50),
             Row(
               children: [
-                Gap(10),
-                Text(
+                const Gap(10),
+                const Text(
                   'Reminder',
                   style: TextStyle(fontSize: 18, fontWeight: FontWeight.w500),
                 ),
-                Gap(240),
-                HealthySwitch(),
+                SizedBox(
+                  width: size.width * 0.54,
+                ),
+                const HealthySwitch(),
               ],
             ),
-            Gap(40),
+            const Gap(40),
             Row(
               children: [
-                Gap(10),
-                Text(
+                const Gap(10),
+                const Text(
                   'Target Liter',
                   style: TextStyle(fontSize: 18, fontWeight: FontWeight.w500),
                 ),
-                Gap(147),
-                HealthyDropdownMenu(
+                SizedBox(width: size.width * 0.30),
+                const HealthyDropdownMenu(
                   list: listLiter,
                 )
               ],
             ),
-            Gap(40),
+            const Gap(40),
             Row(
               children: [
-                Gap(10),
-                Text(
+                const Gap(10),
+                const Text(
                   'Reminder every',
                   style: TextStyle(fontSize: 18, fontWeight: FontWeight.w500),
                 ),
-                Gap(110),
-                HealthyDropdownMenu(list: listHour)
+                SizedBox(
+                  width: size.width * 0.22,
+                ),
+                const HealthyDropdownMenu(list: listHour)
               ],
             ),
-            Gap(50),
+            const Gap(50),
             Row(
               children: [
-                Gap(10),
-                Text(
+                const Gap(10),
+                const Text(
                   'Night mode',
                   style: TextStyle(fontSize: 18, fontWeight: FontWeight.w500),
                 ),
-                Gap(225),
-                HealthySwitch(
-                   
+                SizedBox(
+                  width: size.width * 0.50,
                 ),
+                const HealthySwitch(),
               ],
             ),
           ],

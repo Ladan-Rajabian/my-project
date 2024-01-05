@@ -45,7 +45,7 @@ class _HealthyRecipesCardState extends State<HealthyRecipesCard> {
               ),
             ),
             height: 153,
-            width: 350,
+            width: 340,
           ),
           Align(
             alignment: Alignment.centerLeft,
@@ -70,10 +70,6 @@ class _HealthyRecipesCardState extends State<HealthyRecipesCard> {
                 fontWeight: FontWeight.w500,
               ),
             ),
-          ),
-          const Align(
-            alignment: Alignment.topRight,
-            child: Icon(Icons.favorite_border_outlined),
           ),
         ],
       ),

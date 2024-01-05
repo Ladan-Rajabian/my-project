@@ -14,13 +14,16 @@ class HealthyRow extends StatefulWidget {
 class _HealthyRowState extends State<HealthyRow> {
   @override
   Widget build(BuildContext context) {
+    Size size = MediaQuery.of(context).size;
     return Row(
       children: [
         Text(
           widget.name,
           style: const TextStyle(fontSize: 26, fontWeight: FontWeight.w500),
         ),
-        const Gap(190),
+        SizedBox(
+          width: size.width * 0.41,
+        ),
         const SizedBox(
           width: 60,
           child: TextField(style: TextStyle(fontSize: 20)),
