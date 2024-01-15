@@ -3,8 +3,7 @@ import 'package:flutter_untiteld/firebase_options.dart';
 import 'package:flutter_untiteld/login_page/login_page.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_analytics/firebase_analytics.dart';
-
-
+import 'package:shared_preferences/shared_preferences.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -17,14 +16,17 @@ void main() async {
   } catch (e) {
     print("Failed to initialize Firebase: $e");
   }
-  runApp( MyApp());
+  runApp(MyApp());
+}
+
+Future<void> initSharedPreferences() async {
+  await SharedPreferences.getInstance();
 }
 
 class MyApp extends StatelessWidget {
   final FirebaseAnalytics analytics = FirebaseAnalytics.instance;
 
   MyApp({super.key});
-  
 
   @override
   Widget build(BuildContext context) {

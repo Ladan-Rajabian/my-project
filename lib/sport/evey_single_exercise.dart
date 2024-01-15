@@ -1,12 +1,20 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
-
+import 'package:shared_preferences/shared_preferences.dart';
 
 class HealthyExersiceWidget extends StatefulWidget {
+  final DateTime date;
   final String description;
   final String imagePath;
-  const HealthyExersiceWidget(
-      {super.key, required this.description, required this.imagePath});
+  HealthyExersiceWidget({
+    Key? key,
+    required this.description,
+    required this.imagePath,
+    DateTime? date,
+  })  : date = date ?? DateTime.now(),
+        super(key: key);
 
   @override
   State<HealthyExersiceWidget> createState() => _HealthyExersiceWidgetState();
@@ -43,12 +51,26 @@ class _HealthyExersiceWidgetState extends State<HealthyExersiceWidget> {
               Padding(
                 padding: const EdgeInsets.all(50),
                 child: ElevatedButton(
-                    onPressed: () {}, child: const Text('Workout done')),
-              )
+                    onPressed: () async {
+                      await updateDailyCheckStatus(widget.date, true);
+                      Navigator.pop(context);
+                    },
+                    child: const Text('Workout done')),
+              ),
             ],
           ),
         ),
       ),
     );
+  }
+
+  Future<void> updateDailyCheckStatus(DateTime date, bool completed) async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    String? dailyCheckString = prefs.getString('dailyCheck');
+    Map<String, dynamic> dailyCheckMap = dailyCheckString != null
+        ? Map<String, dynamic>.from(json.decode(dailyCheckString))
+        : {};
+    dailyCheckMap[date.toString()] = completed;
+    prefs.setString('dailyCheck', json.encode(dailyCheckMap));
   }
 }

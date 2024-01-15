@@ -1,5 +1,8 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_heatmap_calendar/flutter_heatmap_calendar.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class DailyCheck extends StatefulWidget {
   const DailyCheck({super.key});
@@ -9,31 +12,48 @@ class DailyCheck extends StatefulWidget {
 }
 
 class _DailyCheckState extends State<DailyCheck> {
+  Map<DateTime, int> dailyCheckData = {};
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        backgroundColor: const Color.fromARGB(255, 232, 237, 244),
-        appBar: AppBar(
-          title: const Text('Daily check'),
-        ),
-        body: Padding(
-          padding: const EdgeInsets.only(top: 30, left: 10, right: 10),
-          child: HeatMapCalendar(
-            defaultColor: Colors.white,
-            flexible: true,
-            colorMode: ColorMode.color,
-            datasets: {
-              DateTime(2023, 11, 3): 1,
-              DateTime(2023, 11, 4): 2,
-              DateTime(2023, 11, 5): 2,
-              DateTime(2023, 11, 6): 1,
-              DateTime(2023, 11, 7): 2,
-            },
-            colorsets: const {
-              1: Color.fromARGB(255, 211, 12, 12),
-              2: Color.fromARGB(255, 1, 171, 7),
-            },
-          ),
-        ));
+      backgroundColor: const Color.fromARGB(255, 232, 237, 244),
+      appBar: AppBar(
+        title: const Text('Daily check'),
+      ),
+      body: FutureBuilder<Map<String, dynamic>>(
+          future: loadDailyCheckData(),
+          builder: (context, snapshot) {
+            if (snapshot.connectionState == ConnectionState.done) {
+              if (snapshot.hasData) {
+                dailyCheckData = snapshot.data!.map((key, value) {
+                  int test = value ? 1 : 0;
+                  DateTime realTime = DateTime(
+                    DateTime.parse(key).year,
+                    DateTime.parse(key).month,
+                    DateTime.parse(key).day,
+                  );
+                  return MapEntry(realTime, test);
+                });
+              }
+
+              return Center(
+                child: HeatMapCalendar(
+                    datasets: dailyCheckData,
+                    colorsets: const {1: Colors.green}),
+              );
+            } else {
+              return const Center(child: CircularProgressIndicator());
+            }
+          }),
+    );
+  }
+
+  Future<Map<String, dynamic>> loadDailyCheckData() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    String? dailyCheckString = prefs.getString('dailyCheck');
+    return dailyCheckString != null
+        ? Map<String, dynamic>.from(json.decode(dailyCheckString))
+        : {};
   }
 }
