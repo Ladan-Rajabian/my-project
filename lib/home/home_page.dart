@@ -23,7 +23,7 @@ class HomeWidget extends StatelessWidget {
         child: SingleChildScrollView(
           child: Column(
             children: [
-              const Gap(40),
+              const Gap(20),
               SizedBox(
                   height: 200,
                   width: 370,

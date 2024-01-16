@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_untiteld/home/favorite_page.dart';
 import 'package:flutter_untiteld/home/home_page.dart';
 import 'package:flutter_untiteld/home/profile.dart';
 
@@ -13,7 +14,7 @@ class _BottomNavigationState extends State<BottomNavigation> {
   static const List<Widget> _widgetOptions = <Widget>[
     HomeWidget(),
     ProfilePage(),
-    Text('Favourite'),
+    FavoritePage(),
   ];
   void _onItemTapp(int index) {
     setState(() {
