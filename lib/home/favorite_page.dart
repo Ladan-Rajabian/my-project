@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_untiteld/recipes/recipe.dart';
 import 'package:flutter_untiteld/widgets/healthy_recipes_card.dart';
 import 'package:gap/gap.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class FavoritePage extends StatefulWidget {
   const FavoritePage({super.key});
@@ -11,6 +12,8 @@ class FavoritePage extends StatefulWidget {
 }
 
 class _FavoritePageState extends State<FavoritePage> {
+ 
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -42,4 +45,5 @@ class _FavoritePageState extends State<FavoritePage> {
       ),
     );
   }
+  
 }

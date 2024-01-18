@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_untiteld/recipes/every_single_recipe.dart';
 import 'package:flutter_untiteld/recipes/recipe.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class HealthyRecipesCard extends StatefulWidget {
   final String imagePath;
@@ -31,7 +32,27 @@ class HealthyRecipesCard extends StatefulWidget {
 }
 
 class _HealthyRecipesCardState extends State<HealthyRecipesCard> {
-  bool isFavorite = false;
+  late bool isFavorite = false;
+
+  @override
+  void initState() {
+    super.initState();
+    loadFavouriteStatus();
+  }
+
+  void loadFavouriteStatus() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    String key = 'favorite_recipe_${widget.index}';
+    setState(() {
+      isFavorite = prefs.getBool(key) ?? false;
+    });
+  }
+
+  void savedFavoriteStatus() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    String key = 'favorite_recipe_${widget.index}';
+    prefs.setBool(key, isFavorite);
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -84,10 +105,15 @@ class _HealthyRecipesCardState extends State<HealthyRecipesCard> {
             child: IconButton(
               icon: Icon(isFavorite ? Icons.favorite : Icons.favorite_border),
               onPressed: () {
-                allFavouriteRecipes.add(allRecipes[widget.index]);
-              
+                if (isFavorite) {
+                  allFavouriteRecipes.remove(allRecipes[widget.index]);
+                } else {
+                  allFavouriteRecipes.add(allRecipes[widget.index]);
+                }
+
                 setState(() {
                   isFavorite = !isFavorite;
+                  savedFavoriteStatus();
                 });
               },
             ),
