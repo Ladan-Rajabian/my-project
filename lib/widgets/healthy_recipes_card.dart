@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_untiteld/recipes/every_single_recipe.dart';
+import 'package:flutter_untiteld/recipes/recipe.dart';
 
 class HealthyRecipesCard extends StatefulWidget {
   final String imagePath;
@@ -11,21 +12,27 @@ class HealthyRecipesCard extends StatefulWidget {
   final String ingredients;
   final String method;
 
-  const HealthyRecipesCard(
-      {super.key,
-      required this.imagePath,
-      required this.description,
-      required this.appbar,
-      required this.serve,
-      required this.cookTime,
-      required this.ingredients,
-      required this.method});
+  final int index;
+
+  const HealthyRecipesCard({
+    super.key,
+    required this.imagePath,
+    required this.description,
+    required this.appbar,
+    required this.serve,
+    required this.cookTime,
+    required this.ingredients,
+    required this.method,
+    required this.index,
+  });
 
   @override
   State<HealthyRecipesCard> createState() => _HealthyRecipesCardState();
 }
 
 class _HealthyRecipesCardState extends State<HealthyRecipesCard> {
+  bool isFavorite = false;
+
   @override
   Widget build(BuildContext context) {
     return InkWell(
@@ -69,6 +76,20 @@ class _HealthyRecipesCardState extends State<HealthyRecipesCard> {
                 fontSize: 20,
                 fontWeight: FontWeight.w500,
               ),
+            ),
+          ),
+          Positioned(
+            top: 8,
+            right: 45,
+            child: IconButton(
+              icon: Icon(isFavorite ? Icons.favorite : Icons.favorite_border),
+              onPressed: () {
+                allFavouriteRecipes.add(allRecipes[widget.index]);
+              
+                setState(() {
+                  isFavorite = !isFavorite;
+                });
+              },
             ),
           ),
         ],
