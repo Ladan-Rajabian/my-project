@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_untiteld/recipes/every_single_recipe.dart';
-import 'package:flutter_untiteld/recipes/recipe_model.dart';
-
 import 'package:shared_preferences/shared_preferences.dart';
 
 class HealthyRecipesCard extends StatefulWidget {

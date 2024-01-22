@@ -1,12 +1,21 @@
-import 'dart:io';
+import 'dart:typed_data';
 
 import 'package:flutter/material.dart';
 
 import 'package:gap/gap.dart';
 import 'package:image_picker/image_picker.dart';
 
-class ProfilePage extends StatelessWidget {
+class ProfilePage extends StatefulWidget {
   const ProfilePage({super.key});
+
+  @override
+  State<ProfilePage> createState() => _ProfilePageState();
+}
+
+class _ProfilePageState extends State<ProfilePage> {
+  Uint8List? _image;
+
+  
 
   @override
   Widget build(BuildContext context) {
@@ -66,110 +75,43 @@ class ProfilePage extends StatelessWidget {
   Widget profileImage(BuildContext context) {
     return Stack(
       children: [
-        const CircleAvatar(
-          radius: 80,
-          backgroundImage: AssetImage('assets/image/profilePic.png'),
-        ),
+        _image != null
+            ? CircleAvatar(
+                radius: 80,
+                backgroundImage: MemoryImage(_image!),
+              )
+            : const CircleAvatar(
+                radius: 80,
+                backgroundImage: AssetImage('assets/image/profilePic.png'),
+              ),
         Positioned(
-          bottom: 20,
-          right: 20,
-          child: InkWell(
-            onTap: () {
-              showModalBottomSheet<void>(
-                showDragHandle: true,
-                context: context,
-                builder: ((BuildContext context) {
-                  return bottomSheet();
-                }),
-              );
+          bottom: -10,
+          right: 5,
+          child: IconButton(
+            onPressed: () {
+              selectImage();
             },
-            child: const Icon(
-              Icons.camera_alt,
-              color: Color.fromARGB(255, 74, 85, 162),
-              size: 28,
-            ),
+            icon: const Icon(Icons.add_a_photo),
           ),
-        )
-      ],
-    );
-  }
-
-  Widget bottomSheet() {
-    return Container(
-      height: 150,
-      margin: const EdgeInsets.symmetric(
-        horizontal: 20,
-        vertical: 20,
-      ),
-      child: const Column(
-        children: [
-          Text(
-            'Choose profile photo',
-            style: TextStyle(fontSize: 20),
-          ),
-          Gap(20),
-          Expanded(
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [MyPickerImage()],
-            ),
-          )
-        ],
-      ),
-    );
-  }
-}
-
-class MyPickerImage extends StatefulWidget {
-  const MyPickerImage({super.key});
-
-  @override
-  State<MyPickerImage> createState() => _MyPickerImageState();
-}
-
-class _MyPickerImageState extends State<MyPickerImage> {
-  String imagePath = '';
-  @override
-  Widget build(BuildContext context) {
-    return Column(
-      children: [
-        Row(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            IconButton(
-                onPressed: () async {
-                  final image =
-                      await ImagePicker().pickImage(source: ImageSource.camera);
-                  setState(() {
-                    imagePath = image?.path ?? "";
-                  });
-                },
-                icon: const Icon(Icons.camera_alt)),
-            const Gap(20),
-            IconButton(
-              onPressed: () async {
-                final image =
-                    await ImagePicker().pickImage(source: ImageSource.gallery);
-                setState(() {
-                  imagePath = image?.path ?? "";
-                });
-              },
-              icon: const Icon(Icons.photo_album),
-            ),
-          ],
-        ),
-        Container(
-          padding: const EdgeInsets.all(16.0),
-          child: imagePath.isNotEmpty
-              ? Image.file(
-                  (File(imagePath)),
-                  height: 300.0,
-                  width: 300.0,
-                  fit: BoxFit.cover,
-                )
-              : const Text('No Photo Selected yet'),
         ),
       ],
     );
   }
+
+  void selectImage() async {
+    Uint8List img = await pickImage(ImageSource.gallery);
+
+    setState(() {
+      _image = img;
+    });
+  }
+}
+
+pickImage(ImageSource source) async {
+  final ImagePicker _imagePicker = ImagePicker();
+  XFile? _file = await _imagePicker.pickImage(source: source);
+  if (_file != null) {
+    return await _file.readAsBytes();
+  }
+  print('No Image selected');
 }
