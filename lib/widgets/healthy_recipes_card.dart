@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_untiteld/recipes/every_single_recipe.dart';
-import 'package:flutter_untiteld/recipes/recipe.dart';
+import 'package:flutter_untiteld/recipes/recipe_model.dart';
+
 import 'package:shared_preferences/shared_preferences.dart';
 
 class HealthyRecipesCard extends StatefulWidget {
@@ -43,15 +44,28 @@ class _HealthyRecipesCardState extends State<HealthyRecipesCard> {
   void loadFavouriteStatus() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     String key = 'favorite_recipe_${widget.index}';
+
     setState(() {
       isFavorite = prefs.getBool(key) ?? false;
     });
   }
 
-  void savedFavoriteStatus() async {
+  void toggleFavoriteStatus() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     String key = 'favorite_recipe_${widget.index}';
-    prefs.setBool(key, isFavorite);
+    List<String> favoriteIndices =
+        prefs.getStringList('favorite_recipe_indices') ?? [];
+
+    setState(() {
+      isFavorite = !isFavorite;
+      if (isFavorite) {
+        favoriteIndices.add(widget.index.toString());
+      } else {
+        favoriteIndices.remove(widget.index.toString());
+      }
+      prefs.setBool(key, isFavorite);
+      prefs.setStringList('favorite_recipe_indices', favoriteIndices);
+    });
   }
 
   @override
@@ -105,16 +119,7 @@ class _HealthyRecipesCardState extends State<HealthyRecipesCard> {
             child: IconButton(
               icon: Icon(isFavorite ? Icons.favorite : Icons.favorite_border),
               onPressed: () {
-                if (isFavorite) {
-                  allFavouriteRecipes.remove(allRecipes[widget.index]);
-                } else {
-                  allFavouriteRecipes.add(allRecipes[widget.index]);
-                }
-
-                setState(() {
-                  isFavorite = !isFavorite;
-                  savedFavoriteStatus();
-                });
+                toggleFavoriteStatus();
               },
             ),
           ),

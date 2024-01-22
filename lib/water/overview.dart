@@ -1,4 +1,5 @@
 import 'package:circular_chart_flutter/circular_chart_flutter.dart';
+
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 
@@ -32,9 +33,7 @@ class _OverViewState extends State<OverView> {
           body: const TabBarView(
             children: [
               DayPreview(),
-              Center(
-                child: Text('week'),
-              ),
+              Text('week'),
               Center(
                 child: Text('month'),
               ),
@@ -188,5 +187,19 @@ class _DayPreviewState extends State<DayPreview> {
         ],
       ),
     );
+  }
+}
+
+class WeekPreview extends StatefulWidget {
+  const WeekPreview({super.key});
+
+  @override
+  State<WeekPreview> createState() => _WeekPreviewState();
+}
+
+class _WeekPreviewState extends State<WeekPreview> {
+  @override
+  Widget build(BuildContext context) {
+    return Container();
   }
 }

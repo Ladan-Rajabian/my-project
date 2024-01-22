@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_untiteld/recipes/recipe.dart';
+import 'package:flutter_untiteld/recipes/recipe_model.dart';
 import 'package:flutter_untiteld/widgets/healthy_recipes_card.dart';
 import 'package:gap/gap.dart';
 

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_untiteld/recipes/recipes.dart';
+import 'package:flutter_untiteld/recipes/recipes_UI.dart';
 import 'package:flutter_untiteld/sport/sport.dart';
 import 'package:flutter_untiteld/water/water_reminder.dart';
 import 'package:gap/gap.dart';
