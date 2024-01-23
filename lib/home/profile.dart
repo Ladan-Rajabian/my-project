@@ -1,9 +1,11 @@
+import 'dart:convert';
 import 'dart:typed_data';
 
 import 'package:flutter/material.dart';
 
 import 'package:gap/gap.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class ProfilePage extends StatefulWidget {
   const ProfilePage({super.key});
@@ -14,8 +16,17 @@ class ProfilePage extends StatefulWidget {
 
 class _ProfilePageState extends State<ProfilePage> {
   Uint8List? _image;
+  late SharedPreferences _prefs;
+  @override
+  void initState() {
+    super.initState();
+    initPrefs();
+  }
 
-  
+  Future<void> initPrefs() async {
+    _prefs = await SharedPreferences.getInstance();
+    loadProfileImage();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -104,14 +115,29 @@ class _ProfilePageState extends State<ProfilePage> {
     setState(() {
       _image = img;
     });
+    saveProfileImage(img);
+  }
+
+  Future<void> saveProfileImage(Uint8List image) async {
+    String base64Image = base64Encode(image);
+    _prefs.setString('profile_image', base64Image);
+  }
+
+  Future<void> loadProfileImage() async {
+    String? base64Image = _prefs.getString('profile_image');
+    if (base64Image != null) {
+      setState(() {
+        _image = base64Decode(base64Image);
+      });
+    }
   }
 }
 
-pickImage(ImageSource source) async {
+Future<Uint8List> pickImage(ImageSource source) async {
   final ImagePicker _imagePicker = ImagePicker();
   XFile? _file = await _imagePicker.pickImage(source: source);
   if (_file != null) {
     return await _file.readAsBytes();
   }
-  print('No Image selected');
+  return Uint8List(0);
 }
