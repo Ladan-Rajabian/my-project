@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 class HealthySwitch extends StatefulWidget {
+  
   const HealthySwitch({super.key});
 
   @override
@@ -8,7 +9,7 @@ class HealthySwitch extends StatefulWidget {
 }
 
 class _HealthySwitchState extends State<HealthySwitch> {
-  bool light = true;
+  bool light = false;
 
   @override
   Widget build(BuildContext context) {

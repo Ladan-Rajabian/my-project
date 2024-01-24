@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 import 'package:flutter_untiteld/widgets/healthy_dropdowm_menu.dart';
 import 'package:flutter_untiteld/widgets/healthy_switch.dart';
+
 import 'package:gap/gap.dart';
 
 const List<String> listLiter = <String>[
@@ -29,6 +30,8 @@ class Setting extends StatefulWidget {
 }
 
 class _SettingState extends State<Setting> {
+  TimeOfDay startTime = const TimeOfDay(hour: 22, minute: 0);
+  TimeOfDay endTime = const TimeOfDay(hour: 9, minute: 0);
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
@@ -84,17 +87,50 @@ class _SettingState extends State<Setting> {
               ],
             ),
             const Gap(50),
+            const Text(
+              'Night mode',
+              style: TextStyle(fontSize: 18, fontWeight: FontWeight.w500),
+            ),
+            const Gap(40),
             Row(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
-                const Gap(10),
-                const Text(
-                  'Night mode',
-                  style: TextStyle(fontSize: 18, fontWeight: FontWeight.w500),
+                Text('Start Time: ${startTime.format(context)}'),
+                IconButton(
+                  icon: const Icon(Icons.timer),
+                  onPressed: () async {
+                    final TimeOfDay? timeOfDay = await showTimePicker(
+                      context: context,
+                      initialTime: startTime,
+                    );
+                    if (timeOfDay != null) {
+                      setState(() {
+                        startTime = timeOfDay;
+                      });
+                    }
+                  },
                 ),
-                SizedBox(
-                  width: size.width * 0.50,
+              ],
+            ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              children: [
+                Text('End Time: ${endTime.format(context)}'),
+                IconButton(
+                  icon: const Icon(Icons.timer_off_rounded),
+                  onPressed: () async {
+                    final TimeOfDay? timeOfDay = await showTimePicker(
+                      context: context,
+                      initialTime: endTime,
+                    );
+
+                    if (timeOfDay != null) {
+                      setState(() {
+                        endTime = timeOfDay;
+                      });
+                    }
+                  },
                 ),
-                const HealthySwitch(),
               ],
             ),
           ],
