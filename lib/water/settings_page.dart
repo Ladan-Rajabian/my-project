@@ -1,26 +1,7 @@
 import 'package:flutter/material.dart';
-
 import 'package:flutter_untiteld/widgets/healthy_dropdowm_menu.dart';
-import 'package:flutter_untiteld/widgets/healthy_switch.dart';
-
 import 'package:gap/gap.dart';
-
-const List<String> listLiter = <String>[
-  'None',
-  '1 L',
-  '1.5 L',
-  '2 L',
-  '2.5 L',
-  '3 L'
-];
-
-const List<String> listHour = <String>[
-  'None',
-  '1 H',
-  '2 H',
-  '3 H',
-  '4 H',
-];
+import 'package:shared_preferences/shared_preferences.dart';
 
 class Setting extends StatefulWidget {
   const Setting({super.key});
@@ -32,6 +13,56 @@ class Setting extends StatefulWidget {
 class _SettingState extends State<Setting> {
   TimeOfDay startTime = const TimeOfDay(hour: 22, minute: 0);
   TimeOfDay endTime = const TimeOfDay(hour: 9, minute: 0);
+  List<String> listLiter = <String>[
+    'None',
+    '1 L',
+    '1.5 L',
+    '2 L',
+    '2.5 L',
+    '3 L'
+  ];
+  List<String> listHour = <String>[
+    'None',
+    '1 H',
+    '2 H',
+    '3 H',
+    '4 H',
+  ];
+  String selectedLiter = 'None';
+  String selectedRemindTime = 'None';
+  bool isReminderOn = false;
+  @override
+  void initState() {
+    super.initState();
+    _loadSettings();
+  }
+
+  Future<void> _loadSettings() async {
+    final prefs = await SharedPreferences.getInstance();
+    setState(() {
+      isReminderOn = prefs.getBool('isReminderOn') ?? false;
+      selectedLiter = prefs.getString('selectedLiter') ?? 'None';
+      selectedRemindTime = prefs.getString('selectedReminderHour') ?? 'None';
+      final startHour = prefs.getInt('startHour') ?? 22;
+      final startMinute = prefs.getInt('startMinute') ?? 0;
+      startTime = TimeOfDay(hour: startHour, minute: startMinute);
+      final endHour = prefs.getInt('endHour') ?? 9;
+      final endMinute = prefs.getInt('endMinute') ?? 0;
+      endTime = TimeOfDay(hour: endHour, minute: endMinute);
+    });
+  }
+
+  Future<void> _saveSettings() async {
+    final prefs = await SharedPreferences.getInstance();
+    prefs.setBool('isReminderOn', isReminderOn);
+    prefs.setString('selectedLiter', selectedLiter);
+    prefs.setString('selectedReminderHour', selectedRemindTime);
+    prefs.setInt('startHour', startTime.hour);
+    prefs.setInt('startMinute', startTime.minute);
+    prefs.setInt('endHour', endTime.hour);
+    prefs.setInt('endMinute', endTime.minute);
+  }
+
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
@@ -55,7 +86,14 @@ class _SettingState extends State<Setting> {
                 SizedBox(
                   width: size.width * 0.54,
                 ),
-                const HealthySwitch(),
+                Switch(
+                  value: isReminderOn,
+                  onChanged: (value) {
+                    setState(() {
+                      isReminderOn = value;
+                    });
+                  },
+                ),
               ],
             ),
             const Gap(40),
@@ -67,9 +105,14 @@ class _SettingState extends State<Setting> {
                   style: TextStyle(fontSize: 18, fontWeight: FontWeight.w500),
                 ),
                 SizedBox(width: size.width * 0.30),
-                const HealthyDropdownMenu(
-                  list: listLiter,
-                )
+                HealthyDropdownMenu(
+                    list: listLiter,
+                    selectedValue: isReminderOn ? selectedLiter : 'None',
+                    onValueChanged: (value) {
+                      setState(() {
+                        selectedLiter = value;
+                      });
+                    })
               ],
             ),
             const Gap(40),
@@ -83,7 +126,18 @@ class _SettingState extends State<Setting> {
                 SizedBox(
                   width: size.width * 0.22,
                 ),
-                const HealthyDropdownMenu(list: listHour)
+                HealthyDropdownMenu(
+                    list: listHour,
+                    selectedValue: isReminderOn ? selectedRemindTime : 'None',
+                    onValueChanged: (value) {
+                      setState(() {
+                        selectedRemindTime = value;
+                        if (!isReminderOn) {
+                          selectedLiter = 'None';
+                          selectedRemindTime = 'None';
+                        }
+                      });
+                    })
               ],
             ),
             const Gap(50),
@@ -95,7 +149,8 @@ class _SettingState extends State<Setting> {
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
-                Text('Start Time: ${startTime.format(context)}'),
+                Text(
+                    'Start Time: ${isReminderOn ? startTime.format(context) : 'None'}'),
                 IconButton(
                   icon: const Icon(Icons.timer),
                   onPressed: () async {
@@ -115,7 +170,8 @@ class _SettingState extends State<Setting> {
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
-                Text('End Time: ${endTime.format(context)}'),
+                Text(
+                    'End Time: ${isReminderOn ? endTime.format(context) : 'None'}'),
                 IconButton(
                   icon: const Icon(Icons.timer_off_rounded),
                   onPressed: () async {
@@ -132,6 +188,21 @@ class _SettingState extends State<Setting> {
                   },
                 ),
               ],
+            ),
+            const Gap(50),
+            ElevatedButton(
+              onPressed: () async {
+                // Save to SharedPreferences
+                await _saveSettings();
+
+                // Optional: Show a confirmation message
+                ScaffoldMessenger.of(context).showSnackBar(
+                  const SnackBar(
+                    content: Text('Your data has been saved'),
+                  ),
+                );
+              },
+              child: const Text('Save'),
             ),
           ],
         ),
