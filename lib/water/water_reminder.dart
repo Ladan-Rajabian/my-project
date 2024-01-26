@@ -10,42 +10,39 @@ class WaterReminder extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+        backgroundColor: const Color.fromARGB(255, 232, 237, 244),
         appBar: AppBar(
           title: const Text('Water reminder'),
         ),
-        body: Container(
-            decoration: BoxDecoration(
-              image: DecorationImage(
-                  image: const AssetImage('assets/image/waterBackground.png'),
-                  fit: BoxFit.fill,
-                  colorFilter: ColorFilter.mode(
-                      Colors.white.withOpacity(0.30), BlendMode.dstATop)),
+        body: Center(
+          child: Column(children: [
+            const Gap(120),
+            InkWell(
+              child: const HealthyContainer(
+                text: 'Setting',
+              ),
+              onTap: () {
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => const Setting(),
+                    ));
+              },
             ),
-            child: Center(
-              child: Column(children: [
-                const Gap(120),
-                
-                InkWell(
-                  child:const  HealthyContainer(text: 'Setting',),
-                  onTap: () {
-                    Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) => const Setting(),
-                        ));
-                  },
-                ),
-                const Gap(120),
-                InkWell(
-                  child: const HealthyContainer(text: 'Overview',),
-                  onTap: (){
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(builder: (context) => const OverView(),
-                      ));
-                  },
-                ),
-              ]),
-            )));
+            const Gap(120),
+            InkWell(
+              child: const HealthyContainer(
+                text: 'Overview',
+              ),
+              onTap: () {
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => const OverView(),
+                    ));
+              },
+            ),
+          ]),
+        ));
   }
 }

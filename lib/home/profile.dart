@@ -31,6 +31,7 @@ class _ProfilePageState extends State<ProfilePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: const Color.fromARGB(255, 232, 237, 244),
       appBar: AppBar(
         title: const Text('Profile'),
         actions: [
@@ -41,42 +42,33 @@ class _ProfilePageState extends State<ProfilePage> {
           }),
         ],
       ),
-      body: Container(
-        decoration: BoxDecoration(
-          image: DecorationImage(
-              image: const AssetImage('assets/image/profile backgroung.png'),
-              fit: BoxFit.fill,
-              colorFilter: ColorFilter.mode(
-                  Colors.white.withOpacity(0.30), BlendMode.dstATop)),
-        ),
-        child: Padding(
-          padding: const EdgeInsets.all(10),
-          child: Center(
-            child: Column(
-              children: [
-                const Gap(40),
-                profileImage(context),
-                const Gap(50),
-                const Text('Hello Sara!\n welcome to HealthyWay!',
-                    textAlign: TextAlign.center),
-                const Gap(100),
-                Container(
-                  padding: const EdgeInsets.all(15),
-                  height: 160,
-                  width: 300,
-                  decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(30),
-                      border: Border.all(
-                        color: const Color.fromARGB(255, 10, 67, 114),
-                      ),
-                      color: const Color.fromARGB(255, 189, 215, 236)),
-                  child: const Text(
-                    'Are you ready to embark on a journey towards a healthier and more vibrant life? \n Say goodbye to the old and embrace the new with our innovative platform. \n At "HealthyWay", we are dedicated to helping you live your best life.',
-                    textAlign: TextAlign.center,
-                  ),
+      body: Padding(
+        padding: const EdgeInsets.all(10),
+        child: Center(
+          child: Column(
+            children: [
+              const Gap(40),
+              profileImage(context),
+              const Gap(50),
+              const Text('Hello Sara!\n welcome to HealthyWay!',
+                  textAlign: TextAlign.center),
+              const Gap(100),
+              Container(
+                padding: const EdgeInsets.all(15),
+                height: 160,
+                width: 300,
+                decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(30),
+                    border: Border.all(
+                      color: const Color.fromARGB(255, 10, 67, 114),
+                    ),
+                    color: const Color.fromARGB(255, 189, 215, 236)),
+                child: const Text(
+                  'Are you ready to embark on a journey towards a healthier and more vibrant life? \n Say goodbye to the old and embrace the new with our innovative platform. \n At "HealthyWay", we are dedicated to helping you live your best life.',
+                  textAlign: TextAlign.center,
                 ),
-              ],
-            ),
+              ),
+            ],
           ),
         ),
       ),

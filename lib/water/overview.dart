@@ -13,33 +13,12 @@ class OverView extends StatefulWidget {
 class _OverViewState extends State<OverView> {
   @override
   Widget build(BuildContext context) {
-    return DefaultTabController(
-        length: 3,
-        child: Scaffold(
-          appBar: AppBar(
-            title: const Text('Overview'),
-            bottom: const TabBar(tabs: [
-              Tab(
-                text: 'Day',
-              ),
-              Tab(
-                text: 'Week',
-              ),
-              Tab(
-                text: 'Month',
-              )
-            ]),
-          ),
-          body: const TabBarView(
-            children: [
-              DayPreview(),
-              Text('week'),
-              Center(
-                child: Text('month'),
-              ),
-            ],
-          ),
-        ));
+    return Scaffold(
+      appBar: AppBar(
+        title: const Text('Overview'),
+      ),
+      body: DayPreview(),
+    );
   }
 }
 
@@ -65,61 +44,63 @@ class _DayPreviewState extends State<DayPreview> {
   Widget build(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.all(20),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.center,
-        children: [
-          const Gap(40),
-          const Text(
-            'Today',
-            style: TextStyle(fontSize: 20, fontWeight: FontWeight.w500),
-          ),
-          const Gap(40),
-          AnimatedCircularChart(
-            key: _chartKey,
-            size: const Size(300, 300),
-            initialChartData: const <CircularStackEntry>[
-              CircularStackEntry(
-                <CircularSegmentEntry>[
-                  CircularSegmentEntry(
-                    33.33,
-                    Color.fromARGB(255, 0, 158, 255),
-                    rankKey: 'completed',
-                  ),
-                  CircularSegmentEntry(
-                    66.67,
-                    Color.fromARGB(255, 160, 191, 244),
-                    rankKey: 'remaining',
-                  ),
-                ],
-                rankKey: 'progress',
-              ),
-            ],
-            chartType: CircularChartType.Radial,
-            percentageValues: true,
-            holeLabel: '150 ML',
-            labelStyle: const TextStyle(
-              color: Colors.black,
-              fontWeight: FontWeight.bold,
-              fontSize: 24.0,
+      child: Center(
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: [
+            const Gap(40),
+            const Text(
+              'Today',
+              style: TextStyle(fontSize: 20, fontWeight: FontWeight.w500),
             ),
-          ),
-          const Gap(80),
-          IconButton(
-              onPressed: () {
-                showModalBottomSheet<void>(
-                  showDragHandle: true,
-                  context: context,
-                  builder: ((BuildContext context) {
-                    return bottomContainer();
-                  }),
-                );
-              },
-              icon: const Icon(
-                Icons.add,
-                size: 50,
-                color: Color.fromARGB(255, 74, 85, 162),
-              ))
-        ],
+            const Gap(40),
+            AnimatedCircularChart(
+              key: _chartKey,
+              size: const Size(300, 300),
+              initialChartData: const <CircularStackEntry>[
+                CircularStackEntry(
+                  <CircularSegmentEntry>[
+                    CircularSegmentEntry(
+                      33.33,
+                      Color.fromARGB(255, 0, 158, 255),
+                      rankKey: 'completed',
+                    ),
+                    CircularSegmentEntry(
+                      66.67,
+                      Color.fromARGB(255, 160, 191, 244),
+                      rankKey: 'remaining',
+                    ),
+                  ],
+                  rankKey: 'progress',
+                ),
+              ],
+              chartType: CircularChartType.Radial,
+              percentageValues: true,
+              holeLabel: '0 ML',
+              labelStyle: const TextStyle(
+                color: Colors.black,
+                fontWeight: FontWeight.bold,
+                fontSize: 24.0,
+              ),
+            ),
+            const Gap(80),
+            IconButton(
+                onPressed: () {
+                  showModalBottomSheet<void>(
+                    showDragHandle: true,
+                    context: context,
+                    builder: ((BuildContext context) {
+                      return bottomContainer();
+                    }),
+                  );
+                },
+                icon: const Icon(
+                  Icons.add,
+                  size: 50,
+                  color: Color.fromARGB(255, 74, 85, 162),
+                ))
+          ],
+        ),
       ),
     );
   }
@@ -190,16 +171,3 @@ class _DayPreviewState extends State<DayPreview> {
   }
 }
 
-class WeekPreview extends StatefulWidget {
-  const WeekPreview({super.key});
-
-  @override
-  State<WeekPreview> createState() => _WeekPreviewState();
-}
-
-class _WeekPreviewState extends State<WeekPreview> {
-  @override
-  Widget build(BuildContext context) {
-    return Container();
-  }
-}
