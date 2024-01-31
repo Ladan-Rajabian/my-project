@@ -39,6 +39,12 @@ class _DayPreviewState extends State<DayPreview> {
     await _saveReachedGoal(reached);
   }
 
+  void resetReached() {
+    setState(() {
+      reached = 0;
+    });
+  }
+
   Future<void> _saveReachedGoal(int reachedGoal) async {
     final prefs = await SharedPreferences.getInstance();
     prefs.setInt('reachedGoal', reachedGoal);
@@ -88,7 +94,13 @@ class _DayPreviewState extends State<DayPreview> {
                   Icons.add,
                   size: 50,
                   color: Color.fromARGB(255, 74, 85, 162),
-                ))
+                )),
+            const Gap(60),
+            ElevatedButton(
+                onPressed: () {
+                  resetReached();
+                },
+                child: const Text('Reset'))
           ],
         ),
       ),
