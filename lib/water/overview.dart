@@ -1,10 +1,10 @@
-import 'package:circular_chart_flutter/circular_chart_flutter.dart';
-
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class OverView extends StatefulWidget {
-  const OverView({super.key});
+  final double goalLiter;
+  const OverView({Key? key, required this.goalLiter}) : super(key: key);
 
   @override
   State<OverView> createState() => _OverViewState();
@@ -17,29 +17,46 @@ class _OverViewState extends State<OverView> {
       appBar: AppBar(
         title: const Text('Overview'),
       ),
-      body: DayPreview(),
+      body: DayPreview(goalLiter: widget.goalLiter),
     );
   }
 }
 
 class DayPreview extends StatefulWidget {
-  const DayPreview({super.key});
+  final double goalLiter;
+  const DayPreview({Key? key, required this.goalLiter}) : super(key: key);
 
   @override
   State<DayPreview> createState() => _DayPreviewState();
 }
 
 class _DayPreviewState extends State<DayPreview> {
-  final GlobalKey<AnimatedCircularChartState> _chartKey =
-      GlobalKey<AnimatedCircularChartState>();
-  List<CircularStackEntry> data = <CircularStackEntry>[
-    CircularStackEntry(
-      <CircularSegmentEntry>[
-        CircularSegmentEntry(500.0, Colors.red[200], rankKey: 'Q1'),
-      ],
-      rankKey: 'Quarterly Profits',
-    ),
-  ];
+  int reached = 0;
+  Future<void> addWater(int amount) async {
+    setState(() {
+      reached += amount;
+    });
+    await _saveReachedGoal(reached);
+  }
+
+  Future<void> _saveReachedGoal(int reachedGoal) async {
+    final prefs = await SharedPreferences.getInstance();
+    prefs.setInt('reachedGoal', reachedGoal);
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    _loadReachedGoal();
+  }
+
+  Future<void> _loadReachedGoal() async {
+    final prefs = await SharedPreferences.getInstance();
+    setState(() {
+      reached = prefs.getInt('reachedGoal') ?? 0;
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -49,39 +66,12 @@ class _DayPreviewState extends State<DayPreview> {
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             const Gap(40),
-            const Text(
-              'Today',
-              style: TextStyle(fontSize: 20, fontWeight: FontWeight.w500),
-            ),
-            const Gap(40),
-            AnimatedCircularChart(
-              key: _chartKey,
-              size: const Size(300, 300),
-              initialChartData: const <CircularStackEntry>[
-                CircularStackEntry(
-                  <CircularSegmentEntry>[
-                    CircularSegmentEntry(
-                      33.33,
-                      Color.fromARGB(255, 0, 158, 255),
-                      rankKey: 'completed',
-                    ),
-                    CircularSegmentEntry(
-                      66.67,
-                      Color.fromARGB(255, 160, 191, 244),
-                      rankKey: 'remaining',
-                    ),
-                  ],
-                  rankKey: 'progress',
-                ),
-              ],
-              chartType: CircularChartType.Radial,
-              percentageValues: true,
-              holeLabel: '0 ML',
-              labelStyle: const TextStyle(
-                color: Colors.black,
-                fontWeight: FontWeight.bold,
-                fontSize: 24.0,
-              ),
+            Text('today goal: ${widget.goalLiter} L',
+                style: const TextStyle(fontSize: 24)),
+            const Gap(50),
+            Text(
+              'you reached: $reached mL',
+              style: const TextStyle(fontSize: 20),
             ),
             const Gap(80),
             IconButton(
@@ -122,7 +112,9 @@ class _DayPreviewState extends State<DayPreview> {
                     const Text('150 ML'),
                     IconButton(
                       iconSize: 40,
-                      onPressed: () {},
+                      onPressed: () {
+                        addWater(150);
+                      },
                       icon: const Icon(
                         Icons.add,
                       ),
@@ -135,7 +127,9 @@ class _DayPreviewState extends State<DayPreview> {
                     const Text('200 ML'),
                     IconButton(
                       iconSize: 40,
-                      onPressed: () {},
+                      onPressed: () {
+                        addWater(200);
+                      },
                       icon: const Icon(Icons.add),
                     ),
                   ],
@@ -146,7 +140,9 @@ class _DayPreviewState extends State<DayPreview> {
                     const Text('250 ML'),
                     IconButton(
                       iconSize: 40,
-                      onPressed: () {},
+                      onPressed: () {
+                        addWater(250);
+                      },
                       icon: const Icon(Icons.add),
                     ),
                   ],
@@ -157,7 +153,9 @@ class _DayPreviewState extends State<DayPreview> {
                     const Text('300 ML'),
                     IconButton(
                       iconSize: 40,
-                      onPressed: () {},
+                      onPressed: () {
+                        addWater(300);
+                      },
                       icon: const Icon(Icons.add),
                     ),
                   ],
@@ -170,4 +168,3 @@ class _DayPreviewState extends State<DayPreview> {
     );
   }
 }
-

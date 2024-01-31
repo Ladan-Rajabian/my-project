@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-class HealthyDropdownMenu extends StatelessWidget {
+class HealthyDropdownMenu extends StatefulWidget {
   final List<String> list;
   final String selectedValue;
   final Function(String) onValueChanged;
@@ -12,25 +12,32 @@ class HealthyDropdownMenu extends StatelessWidget {
       : super(key: key);
 
   @override
+  State<HealthyDropdownMenu> createState() => _HealthyDropdownMenuState();
+}
+
+class _HealthyDropdownMenuState extends State<HealthyDropdownMenu> {
+  @override
   Widget build(BuildContext context) {
-    return Expanded(
-      child: DropdownButtonFormField<String>(
-        decoration: const InputDecoration(
-          border: OutlineInputBorder(),
-        ),
-        value: selectedValue,
-        onChanged: (String? value) {
-          if (value != null) {
-            onValueChanged(value);
-          }
-        },
-        items: list.map((String value) {
-          return DropdownMenuItem<String>(
-            value: value,
-            child: Text(value),
-          );
-        }).toList(),
+    return DropdownButtonFormField<String>(
+      decoration: const InputDecoration(
+        border: OutlineInputBorder(),
       ),
+      value: widget.list.contains(widget.selectedValue)
+          ? widget.selectedValue
+          : widget.list.first,
+      onChanged: (String? value) {
+        if (value != null) {
+          setState(() {
+            widget.onValueChanged(value);
+          });
+        }
+      },
+      items: widget.list.map((String value) {
+        return DropdownMenuItem<String>(
+          value: value,
+          child: Text(value),
+        );
+      }).toList(),
     );
   }
 }

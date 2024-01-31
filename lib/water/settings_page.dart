@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_untiteld/water/overview.dart';
 import 'package:flutter_untiteld/widgets/healthy_dropdowm_menu.dart';
 import 'package:gap/gap.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -13,13 +14,13 @@ class Setting extends StatefulWidget {
 class _SettingState extends State<Setting> {
   TimeOfDay startTime = const TimeOfDay(hour: 22, minute: 0);
   TimeOfDay endTime = const TimeOfDay(hour: 9, minute: 0);
-  List<String> listLiter = <String>[
+  List<String> listLiter = [
     'None',
-    '1 L',
+    '1.0 L',
     '1.5 L',
-    '2 L',
+    '2.0 L',
     '2.5 L',
-    '3 L'
+    '3.0 L'
   ];
   List<String> listHour = <String>[
     'None',
@@ -41,7 +42,14 @@ class _SettingState extends State<Setting> {
     final prefs = await SharedPreferences.getInstance();
     setState(() {
       isReminderOn = prefs.getBool('isReminderOn') ?? false;
-      selectedLiter = prefs.getString('selectedLiter') ?? 'None';
+      final selectedLiterValue = prefs.get('selectedLiter');
+      if (selectedLiterValue is double) {
+        selectedLiter = selectedLiterValue.toString();
+      } else if (selectedLiterValue is String) {
+        selectedLiter = selectedLiterValue;
+      } else {
+        selectedLiter = 'None';
+      }
       selectedRemindTime = prefs.getString('selectedReminderHour') ?? 'None';
       final startHour = prefs.getInt('startHour') ?? 22;
       final startMinute = prefs.getInt('startMinute') ?? 0;
@@ -105,14 +113,16 @@ class _SettingState extends State<Setting> {
                   style: TextStyle(fontSize: 18, fontWeight: FontWeight.w500),
                 ),
                 SizedBox(width: size.width * 0.30),
-                HealthyDropdownMenu(
-                    list: listLiter,
-                    selectedValue: isReminderOn ? selectedLiter : 'None',
-                    onValueChanged: (value) {
-                      setState(() {
-                        selectedLiter = value;
-                      });
-                    })
+                Expanded(
+                  child: HealthyDropdownMenu(
+                      list: listLiter,
+                      selectedValue: isReminderOn ? selectedLiter : 'None',
+                      onValueChanged: (value) {
+                        setState(() {
+                          selectedLiter = value;
+                        });
+                      }),
+                )
               ],
             ),
             const Gap(40),
@@ -126,18 +136,20 @@ class _SettingState extends State<Setting> {
                 SizedBox(
                   width: size.width * 0.22,
                 ),
-                HealthyDropdownMenu(
-                    list: listHour,
-                    selectedValue: isReminderOn ? selectedRemindTime : 'None',
-                    onValueChanged: (value) {
-                      setState(() {
-                        selectedRemindTime = value;
-                        if (!isReminderOn) {
-                          selectedLiter = 'None';
-                          selectedRemindTime = 'None';
-                        }
-                      });
-                    })
+                Expanded(
+                  child: HealthyDropdownMenu(
+                      list: listHour,
+                      selectedValue: isReminderOn ? selectedRemindTime : 'None',
+                      onValueChanged: (value) {
+                        setState(() {
+                          selectedRemindTime = value;
+                          if (!isReminderOn) {
+                            selectedLiter = 'None';
+                            selectedRemindTime = 'None';
+                          }
+                        });
+                      }),
+                )
               ],
             ),
             const Gap(50),
@@ -201,6 +213,15 @@ class _SettingState extends State<Setting> {
                     content: Text('Your data has been saved'),
                   ),
                 );
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => OverView(
+                          goalLiter: selectedLiter == 'None'
+                              ? 0
+                              : double.parse(selectedLiter.replaceAll(
+                                  RegExp(r'[^0-9]'), ''))),
+                    ));
               },
               child: const Text('Save'),
             ),

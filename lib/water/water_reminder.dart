@@ -3,6 +3,7 @@ import 'package:flutter_untiteld/water/overview.dart';
 import 'package:flutter_untiteld/water/settings_page.dart';
 import 'package:flutter_untiteld/widgets/healthy_inkwell.dart';
 import 'package:gap/gap.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class WaterReminder extends StatelessWidget {
   const WaterReminder({super.key});
@@ -35,14 +36,28 @@ class WaterReminder extends StatelessWidget {
                 text: 'Overview',
               ),
               onTap: () {
-                Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) => const OverView(),
-                    ));
+                navigateToOverview(context);
               },
             ),
           ]),
         ));
+  }
+
+  Future<double> getGoalLiter() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    var goalLiterValue = prefs.getString('selectedLiter');
+    if (goalLiterValue != null) {
+      return double.tryParse(goalLiterValue) ?? 0.0;
+    } else {
+      return 0.0;
+    }
+  }
+
+  Future<void> navigateToOverview(BuildContext context) async {
+    double goalLiter = await getGoalLiter();
+    Navigator.push(
+        context,
+        MaterialPageRoute(
+            builder: (context) => OverView(goalLiter: goalLiter)));
   }
 }
