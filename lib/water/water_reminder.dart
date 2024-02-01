@@ -43,18 +43,18 @@ class WaterReminder extends StatelessWidget {
         ));
   }
 
-  Future<double> getGoalLiter() async {
+  Future<String> getGoalLiter() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     var goalLiterValue = prefs.getString('selectedLiter');
     if (goalLiterValue != null) {
-      return double.tryParse(goalLiterValue) ?? 0.0;
+      return goalLiterValue;
     } else {
-      return 0.0;
+      return 'None';
     }
   }
 
   Future<void> navigateToOverview(BuildContext context) async {
-    double goalLiter = await getGoalLiter();
+    String goalLiter = await getGoalLiter();
     Navigator.push(
         context,
         MaterialPageRoute(

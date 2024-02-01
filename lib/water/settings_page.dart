@@ -213,15 +213,15 @@ class _SettingState extends State<Setting> {
                     content: Text('Your data has been saved'),
                   ),
                 );
-                Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) => OverView(
-                          goalLiter: selectedLiter == 'None'
-                              ? 0
-                              : double.parse(selectedLiter.replaceAll(
-                                  RegExp(r'[^0-9]'), ''))),
-                    ));
+                if (context.mounted) {
+                  Navigator.pushReplacement(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => OverView(
+                              goalLiter: selectedLiter == 'None'
+                                  ? 'None'
+                                  : selectedLiter)));
+                }
               },
               child: const Text('Save'),
             ),

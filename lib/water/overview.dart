@@ -3,7 +3,7 @@ import 'package:gap/gap.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class OverView extends StatefulWidget {
-  final double goalLiter;
+  final String goalLiter;
   const OverView({Key? key, required this.goalLiter}) : super(key: key);
 
   @override
@@ -23,7 +23,7 @@ class _OverViewState extends State<OverView> {
 }
 
 class DayPreview extends StatefulWidget {
-  final double goalLiter;
+  final String goalLiter;
   const DayPreview({Key? key, required this.goalLiter}) : super(key: key);
 
   @override
@@ -39,10 +39,11 @@ class _DayPreviewState extends State<DayPreview> {
     await _saveReachedGoal(reached);
   }
 
-  void resetReached() {
+  void resetReached() async {
     setState(() {
       reached = 0;
     });
+    await _saveReachedGoal(reached);
   }
 
   Future<void> _saveReachedGoal(int reachedGoal) async {
@@ -72,8 +73,8 @@ class _DayPreviewState extends State<DayPreview> {
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             const Gap(40),
-            Text('today goal: ${widget.goalLiter} L',
-                style: const TextStyle(fontSize: 24)),
+            Text('today goal: ${widget.goalLiter}',
+                style: const TextStyle(fontSize: 28)),
             const Gap(50),
             Text(
               'you reached: $reached mL',
