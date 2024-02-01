@@ -3,8 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_untiteld/widgets/bottom_nav.dart';
 import 'package:flutter_untiteld/login_page/signup/signup_page.dart';
 
-class LogInPage extends StatelessWidget {
-  LogInPage({super.key});
+class StartPage extends StatelessWidget {
+  StartPage({super.key});
   final FirebaseAnalytics analytics = FirebaseAnalytics.instance;
 
   Future<void> logLoginEvent() async {
@@ -40,7 +40,8 @@ class LogInPage extends StatelessWidget {
               ),
               ElevatedButton(
                 onPressed: () async {
-                  logLoginEvent().then((value) => Navigator.push(context,
+                  logLoginEvent().then((value) => Navigator.pushReplacement(
+                      context,
                       MaterialPageRoute(builder: (context) => const SignIn())));
                 },
                 child: const Text(
@@ -52,7 +53,7 @@ class LogInPage extends StatelessWidget {
               ),
               OutlinedButton(
                 onPressed: () {
-                  Navigator.push(
+                  Navigator.pushReplacement(
                       context,
                       MaterialPageRoute(
                           builder: (context) => const SignUpPage()));
@@ -134,7 +135,7 @@ class _SignInState extends State<SignIn> {
                     shape: const RoundedRectangleBorder(
                         borderRadius: BorderRadius.all(Radius.circular(20)))),
                 onPressed: () {
-                  Navigator.push(
+                  Navigator.pushReplacement(
                       context,
                       MaterialPageRoute(
                           builder: (context) => const BottomNavigation()));

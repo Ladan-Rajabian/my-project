@@ -50,7 +50,7 @@ class _ProfilePageState extends State<ProfilePage> {
               const Gap(40),
               profileImage(context),
               const Gap(50),
-              const Text('Hello Sara!\n welcome to HealthyWay!',
+              const Text('Hello User!\n welcome to HealthyWay!',
                   textAlign: TextAlign.center),
               const Gap(100),
               Container(
