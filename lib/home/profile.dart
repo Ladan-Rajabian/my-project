@@ -34,13 +34,6 @@ class _ProfilePageState extends State<ProfilePage> {
       backgroundColor: const Color.fromARGB(255, 232, 237, 244),
       appBar: AppBar(
         title: const Text('Profile'),
-        actions: [
-          PopupMenuButton(itemBuilder: (BuildContext context) {
-            return {'Log out'}.map((String choice) {
-              return PopupMenuItem(value: choice, child: Text(choice));
-            }).toList();
-          }),
-        ],
       ),
       body: Padding(
         padding: const EdgeInsets.all(10),
