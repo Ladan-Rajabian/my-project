@@ -44,49 +44,52 @@ class _MyDataState extends State<MyData> {
         title: const Text('My data'),
       ),
       body: Padding(
-        padding: const EdgeInsets.all(20),
+        padding: const EdgeInsets.all(10),
         child: Center(
-          child: Column(
-            children: [
-              const Gap(50),
-              Container(
-                height: 50,
-                width: 300,
-                decoration: const BoxDecoration(
-                    color: Color.fromRGBO(74, 85, 162, 1),
-                    borderRadius: BorderRadius.all(Radius.circular(30))),
-                alignment: Alignment.center,
-                child: const Text(
-                  'Kg / Cm',
-                  style: TextStyle(color: Colors.white, fontSize: 20),
+          child: SingleChildScrollView(
+            child: Column(
+              children: [
+                const Gap(30),
+                Container(
+                  height: 50,
+                  width: 300,
+                  decoration: const BoxDecoration(
+                      color: Color.fromRGBO(74, 85, 162, 1),
+                      borderRadius: BorderRadius.all(Radius.circular(30))),
+                  alignment: Alignment.center,
+                  child: const Text(
+                    'Kg / Cm',
+                    style: TextStyle(color: Colors.white, fontSize: 20),
+                  ),
                 ),
-              ),
-              const Gap(80),
-              Padding(
+                const Gap(80),
+                Padding(
+                    padding: const EdgeInsets.all(15),
+                    child: TextField(
+                      controller: heightController,
+                      keyboardType: TextInputType.number,
+                      decoration:
+                          const InputDecoration(labelText: 'height(Cm)'),
+                    )),
+                Padding(
                   padding: const EdgeInsets.all(15),
                   child: TextField(
-                    controller: heightController,
+                    controller: weightController,
                     keyboardType: TextInputType.number,
-                    decoration: const InputDecoration(labelText: 'height(Cm)'),
-                  )),
-              Padding(
-                padding: const EdgeInsets.all(15),
-                child: TextField(
-                  controller: weightController,
-                  keyboardType: TextInputType.number,
-                  decoration: const InputDecoration(labelText: 'weight(Kg)'),
+                    decoration: const InputDecoration(labelText: 'weight(Kg)'),
+                  ),
                 ),
-              ),
-              const Gap(80),
-              ElevatedButton(
-                  onPressed: () {
-                    saveData();
-                    ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
-                        content:
-                            Text('Height and Weight saved successfully!')));
-                  },
-                  child: const Text('Save')),
-            ],
+                const Gap(80),
+                ElevatedButton(
+                    onPressed: () {
+                      saveData();
+                      ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
+                          content:
+                              Text('Height and Weight saved successfully!')));
+                    },
+                    child: const Text('Save')),
+              ],
+            ),
           ),
         ),
       ),

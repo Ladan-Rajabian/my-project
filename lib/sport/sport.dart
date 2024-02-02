@@ -15,102 +15,103 @@ class SportExercise extends StatelessWidget {
         title: const Text('Sport'),
       ),
       body: Center(
-        child: Column(
-          children: [
-            const Gap(80),
-            InkWell(
-              child: Container(
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(30),
-                    gradient: LinearGradient(
-                      colors: [
-                        const Color.fromRGBO(120, 149, 203, 1)
-                            .withOpacity(0.60),
-                        const Color.fromRGBO(74, 85, 162, 1),
-                      ],
-                      begin: Alignment.topCenter,
-                      end: Alignment.bottomRight,
+        child: SingleChildScrollView(
+          child: Column(
+            children: [
+              InkWell(
+                child: Container(
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(30),
+                      gradient: LinearGradient(
+                        colors: [
+                          const Color.fromRGBO(120, 149, 203, 1)
+                              .withOpacity(0.60),
+                          const Color.fromRGBO(74, 85, 162, 1),
+                        ],
+                        begin: Alignment.topCenter,
+                        end: Alignment.bottomRight,
+                      ),
                     ),
-                  ),
-                  height: 153,
-                  width: 350,
-                  child: Container(
-                    margin: const EdgeInsets.only(left: 40, top: 60),
-                    child: const Text('Exercises',
-                        style: TextStyle(
-                            fontSize: 24, fontWeight: FontWeight.w800)),
-                  )),
-              onTap: () {
-                Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) => const Exercises(),
-                    ));
-              },
-            ),
-            const Gap(80),
-            InkWell(
-              child: Container(
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(30),
-                    gradient: LinearGradient(
-                      colors: [
-                        const Color.fromRGBO(120, 149, 203, 1)
-                            .withOpacity(0.60),
-                        const Color.fromRGBO(74, 85, 162, 1),
-                      ],
-                      begin: Alignment.topCenter,
-                      end: Alignment.bottomRight,
+                    height: 153,
+                    width: 350,
+                    child: Container(
+                      margin: const EdgeInsets.only(left: 40, top: 60),
+                      child: const Text('Exercises',
+                          style: TextStyle(
+                              fontSize: 24, fontWeight: FontWeight.w800)),
+                    )),
+                onTap: () {
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => const Exercises(),
+                      ));
+                },
+              ),
+              const Gap(80),
+              InkWell(
+                child: Container(
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(30),
+                      gradient: LinearGradient(
+                        colors: [
+                          const Color.fromRGBO(120, 149, 203, 1)
+                              .withOpacity(0.60),
+                          const Color.fromRGBO(74, 85, 162, 1),
+                        ],
+                        begin: Alignment.topCenter,
+                        end: Alignment.bottomRight,
+                      ),
                     ),
-                  ),
-                  height: 153,
-                  width: 350,
-                  child: Container(
-                    margin: const EdgeInsets.only(left: 40, top: 60),
-                    child: const Text('Daily check',
-                        style: TextStyle(
-                            fontSize: 24, fontWeight: FontWeight.w800)),
-                  )),
-              onTap: () {
-                Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) => const DailyCheck(),
-                    ));
-              },
-            ),
-            const Gap(80),
-            InkWell(
-              child: Container(
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(30),
-                    gradient: LinearGradient(
-                      colors: [
-                        const Color.fromRGBO(120, 149, 203, 1)
-                            .withOpacity(0.60),
-                        const Color.fromRGBO(74, 85, 162, 1),
-                      ],
-                      begin: Alignment.topCenter,
-                      end: Alignment.bottomRight,
+                    height: 153,
+                    width: 350,
+                    child: Container(
+                      margin: const EdgeInsets.only(left: 40, top: 60),
+                      child: const Text('Daily check',
+                          style: TextStyle(
+                              fontSize: 24, fontWeight: FontWeight.w800)),
+                    )),
+                onTap: () {
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => const DailyCheck(),
+                      ));
+                },
+              ),
+              const Gap(80),
+              InkWell(
+                child: Container(
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(30),
+                      gradient: LinearGradient(
+                        colors: [
+                          const Color.fromRGBO(120, 149, 203, 1)
+                              .withOpacity(0.60),
+                          const Color.fromRGBO(74, 85, 162, 1),
+                        ],
+                        begin: Alignment.topCenter,
+                        end: Alignment.bottomRight,
+                      ),
                     ),
-                  ),
-                  height: 153,
-                  width: 350,
-                  child: Container(
-                    margin: const EdgeInsets.only(left: 40, top: 60),
-                    child: const Text('My data',
-                        style: TextStyle(
-                            fontSize: 24, fontWeight: FontWeight.w800)),
-                  )),
-              onTap: () {
-                Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) => const MyData(),
-                    ));
-              },
-            ),
-          ],
+                    height: 153,
+                    width: 350,
+                    child: Container(
+                      margin: const EdgeInsets.only(left: 40, top: 60),
+                      child: const Text('My data',
+                          style: TextStyle(
+                              fontSize: 24, fontWeight: FontWeight.w800)),
+                    )),
+                onTap: () {
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => const MyData(),
+                      ));
+                },
+              ),
+            ],
+          ),
         ),
       ),
     );

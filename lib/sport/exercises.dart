@@ -6,7 +6,6 @@ import 'package:gap/gap.dart';
 class Exercises extends StatelessWidget {
   const Exercises({super.key});
 
-  
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -22,7 +21,7 @@ class Exercises extends StatelessWidget {
                 Gap(40),
                 //1.Legs
                 HealthyCard(
-                    imagePath: 'assets/exercises/legs1.jpg',
+                    imagePath: 'assets/workout/IMG_0059.JPG',
                     description: 'Legs workout'),
                 Gap(40),
                 //2.abs

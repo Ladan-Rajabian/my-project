@@ -71,7 +71,7 @@ class _ProfilePageState extends State<ProfilePage> {
   Widget profileImage(BuildContext context) {
     return Stack(
       children: [
-        _image != null
+        _image?.isNotEmpty ?? false
             ? CircleAvatar(
                 radius: 80,
                 backgroundImage: MemoryImage(_image!),
