@@ -26,58 +26,58 @@ class Exercises extends StatelessWidget {
                 Gap(40),
                 //2.abs
                 HealthyCard(
-                    imagePath: 'assets/exercises/abs1.jpg',
-                    description: 'Abs workout'),
+                    imagePath: 'assets/workout/IMG_0071.JPG',
+                    description: 'Upper body'),
                 Gap(40),
                 //3.Abs
                 HealthyCard(
-                    imagePath: 'assets/exercises/glute3.jpg',
-                    description: 'Glute workout'),
+                    imagePath: 'assets/workout/IMG_0073.JPG',
+                    description: 'Abs workout'),
                 Gap(40),
                 //4.fullbody
                 HealthyCard(
-                    imagePath: 'assets/exercises/fullbody4.jpg',
+                    imagePath: 'assets/workout/IMG_0074.JPG',
                     description: 'Full body'),
                 Gap(40),
                 //5.Legs
                 HealthyCard(
-                    imagePath: 'assets/exercises/legs5.jpg',
+                    imagePath: 'assets/workout/IMG_0077.JPG',
                     description: 'Legs workout'),
                 Gap(40),
                 //6.fullbody
                 HealthyCard(
-                    imagePath: 'assets/exercises/fullbody6.jpg',
-                    description: 'Full body'),
+                    imagePath: 'assets/workout/IMG_0079.JPG',
+                    description: 'Upper body'),
                 Gap(40),
                 //7.lowerabs
                 HealthyCard(
-                    imagePath: 'assets/exercises/lowerabs7.jpg',
-                    description: 'Lower Abs'),
+                    imagePath: 'assets/workout/IMG_0076.JPG',
+                    description: 'Abs workout'),
                 Gap(40),
                 //8.full body
                 HealthyCard(
-                    imagePath: 'assets/exercises/fullbody8.jpg',
+                    imagePath: 'assets/workout/IMG_0078.JPG',
                     description: 'Full body'),
                 Gap(40),
                 //9.glute
                 HealthyCard(
-                    imagePath: 'assets/exercises/glute9.jpg',
+                    imagePath: 'assets/workout/IMG_0080.JPG',
                     description: 'Glute workout'),
                 Gap(40),
                 //10lowerabs
                 HealthyCard(
-                    imagePath: 'assets/exercises/lower10.jpg',
-                    description: 'Lower Abs'),
+                    imagePath: 'assets/workout/IMG_0081.JPG',
+                    description: 'Abs workout'),
                 Gap(40),
                 //11legs
                 HealthyCard(
-                    imagePath: 'assets/exercises/legs11.jpg',
-                    description: 'Legs workout'),
+                    imagePath: 'assets/workout/IMG_0082.JPG',
+                    description: 'Full body'),
                 Gap(40),
                 //12fullbody
                 HealthyCard(
-                    imagePath: 'assets/exercises/full12.jpg',
-                    description: 'Full body'),
+                    imagePath: 'assets/workout/IMG_0083.JPG',
+                    description: 'HIIT'),
               ],
             ),
           ],

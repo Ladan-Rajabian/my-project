@@ -48,7 +48,7 @@ class _ProfilePageState extends State<ProfilePage> {
               const Gap(100),
               Container(
                 padding: const EdgeInsets.all(15),
-                height: 160,
+                height: 180,
                 width: 300,
                 decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(30),
