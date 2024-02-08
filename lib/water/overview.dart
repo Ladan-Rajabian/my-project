@@ -69,40 +69,46 @@ class _DayPreviewState extends State<DayPreview> {
     return Padding(
       padding: const EdgeInsets.all(20),
       child: Center(
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: [
-            const Gap(40),
-            Text('today goal: ${widget.goalLiter}',
-                style: const TextStyle(fontSize: 28)),
-            const Gap(50),
-            Text(
-              'you reached: $reached mL',
-              style: const TextStyle(fontSize: 20),
-            ),
-            const Gap(80),
-            IconButton(
-                onPressed: () {
-                  showModalBottomSheet<void>(
-                    showDragHandle: true,
-                    context: context,
-                    builder: ((BuildContext context) {
-                      return bottomContainer();
-                    }),
-                  );
-                },
-                icon: const Icon(
-                  Icons.add,
-                  size: 50,
-                  color: Color.fromARGB(255, 74, 85, 162),
-                )),
-            const Gap(60),
-            ElevatedButton(
-                onPressed: () {
-                  resetReached();
-                },
-                child: const Text('Reset'))
-          ],
+        child: SingleChildScrollView(
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              Text('today goal: ${widget.goalLiter}',
+                  style: const TextStyle(fontSize: 28)),
+              const Gap(40),
+              Text(
+                'you reached: $reached mL',
+                style: const TextStyle(fontSize: 20),
+              ),
+              const Gap(20),
+              Image.network(
+                'https://images.unsplash.com/photo-1548839140-29a749e1cf4d?q=80&w=1588&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
+                height: 290,
+              ),
+              const Gap(50),
+              IconButton(
+                  onPressed: () {
+                    showModalBottomSheet<void>(
+                      showDragHandle: true,
+                      context: context,
+                      builder: ((BuildContext context) {
+                        return bottomContainer();
+                      }),
+                    );
+                  },
+                  icon: const Icon(
+                    Icons.add,
+                    size: 50,
+                    color: Color.fromARGB(255, 74, 85, 162),
+                  )),
+              const Gap(40),
+              ElevatedButton(
+                  onPressed: () {
+                    resetReached();
+                  },
+                  child: const Text('Reset'))
+            ],
+          ),
         ),
       ),
     );

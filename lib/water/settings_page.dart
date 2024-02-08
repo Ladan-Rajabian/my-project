@@ -1,7 +1,5 @@
-import 'package:awesome_notifications/awesome_notifications.dart';
-import 'package:flutter/material.dart';
-import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 
+import 'package:flutter/material.dart';
 import 'package:flutter_untiteld/water/overview.dart';
 import 'package:flutter_untiteld/widgets/healthy_dropdowm_menu.dart';
 import 'package:gap/gap.dart';
@@ -36,9 +34,7 @@ class _SettingState extends State<Setting> {
   String selectedRemindTime = 'None';
   bool isReminderOn = false;
 
-  final FlutterLocalNotificationsPlugin flutterLocalNotificationsPlugin =
-      FlutterLocalNotificationsPlugin();
-
+  
   @override
   void initState() {
     super.initState();
