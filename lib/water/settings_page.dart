@@ -1,6 +1,9 @@
-
+import 'package:awesome_notifications/awesome_notifications.dart';
+import 'package:cron/cron.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_untiteld/main.dart';
 import 'package:flutter_untiteld/water/overview.dart';
+import 'package:flutter_untiteld/water/water_reminder.dart';
 import 'package:flutter_untiteld/widgets/healthy_dropdowm_menu.dart';
 import 'package:gap/gap.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -13,8 +16,8 @@ class Setting extends StatefulWidget {
 }
 
 class _SettingState extends State<Setting> {
-  TimeOfDay startTime = const TimeOfDay(hour: 22, minute: 0);
-  TimeOfDay endTime = const TimeOfDay(hour: 9, minute: 0);
+  late Cron _cron;
+
   List<String> listLiter = [
     'None',
     '1.0 L',
@@ -23,22 +26,67 @@ class _SettingState extends State<Setting> {
     '2.5 L',
     '3.0 L'
   ];
-  List<String> listHour = <String>[
-    'None',
-    '1 H',
-    '2 H',
-    '3 H',
-    '4 H',
-  ];
+
   String selectedLiter = 'None';
-  String selectedRemindTime = 'None';
+
   bool isReminderOn = false;
 
-  
   @override
   void initState() {
+    AwesomeNotifications().setListeners(
+        onActionReceivedMethod: NotificationController.onActionReceivedMethod,
+        onNotificationCreatedMethod:
+            NotificationController.onNotificationCreatedMethod,
+        onNotificationDisplayedMethod:
+            NotificationController.onNotificationDisplayedMethod,
+        onDismissActionReceivedMethod:
+            NotificationController.onDismissActionReceivedMethod);
     super.initState();
+    _cron = Cron()
+      ..schedule(Schedule.parse('0 9,11,13,15,17,19,21,23 * * *'), () {
+        // This function will be executed every 2 hours between 9 AM and 11 PM
+        _showNotification();
+      });
+    _requestNotificationPermissions();
     _loadSettings();
+  }
+
+  @override
+  void dispose() {
+    // Stop the cron scheduler when the widget is disposed
+    _cron.close();
+    super.dispose();
+  }
+
+  Future<void> _requestNotificationPermissions() async {
+    await AwesomeNotifications().requestPermissionToSendNotifications();
+  }
+
+  Future<void> _showNotification() async {
+    await AwesomeNotifications().isNotificationAllowed().then((isAllowed) {
+      if (isReminderOn) {
+        AwesomeNotifications().createNotification(
+          content: NotificationContent(
+            id: 10,
+            channelKey: 'Alerts',
+            actionType: ActionType.Default,
+            title: 'Healthy Way',
+            body: 'It\'s time to drink water',
+          ),
+          actionButtons: [
+            NotificationActionButton(
+              key: "Alerts",
+              label: "Dismiss",
+              actionType: ActionType.DismissAction,
+            )
+          ],
+        );
+      }
+
+      if (!isAllowed) {
+        AwesomeNotifications().requestPermissionToSendNotifications();
+      }
+    });
   }
 
   Future<void> _loadSettings() async {
@@ -53,13 +101,6 @@ class _SettingState extends State<Setting> {
       } else {
         selectedLiter = 'None';
       }
-      selectedRemindTime = prefs.getString('selectedReminderHour') ?? 'None';
-      final startHour = prefs.getInt('startHour') ?? 22;
-      final startMinute = prefs.getInt('startMinute') ?? 0;
-      startTime = TimeOfDay(hour: startHour, minute: startMinute);
-      final endHour = prefs.getInt('endHour') ?? 9;
-      final endMinute = prefs.getInt('endMinute') ?? 0;
-      endTime = TimeOfDay(hour: endHour, minute: endMinute);
     });
   }
 
@@ -67,11 +108,6 @@ class _SettingState extends State<Setting> {
     final prefs = await SharedPreferences.getInstance();
     prefs.setBool('isReminderOn', isReminderOn);
     prefs.setString('selectedLiter', selectedLiter);
-    prefs.setString('selectedReminderHour', selectedRemindTime);
-    prefs.setInt('startHour', startTime.hour);
-    prefs.setInt('startMinute', startTime.minute);
-    prefs.setInt('endHour', endTime.hour);
-    prefs.setInt('endMinute', endTime.minute);
   }
 
   @override
@@ -129,81 +165,6 @@ class _SettingState extends State<Setting> {
               ],
             ),
             const Gap(40),
-            Row(
-              children: [
-                const Gap(10),
-                const Text(
-                  'Reminder every',
-                  style: TextStyle(fontSize: 18, fontWeight: FontWeight.w500),
-                ),
-                SizedBox(
-                  width: size.width * 0.22,
-                ),
-                Expanded(
-                  child: HealthyDropdownMenu(
-                      list: listHour,
-                      selectedValue: isReminderOn ? selectedRemindTime : 'None',
-                      onValueChanged: (value) {
-                        setState(() {
-                          selectedRemindTime = value;
-                          if (!isReminderOn) {
-                            selectedLiter = 'None';
-                            selectedRemindTime = 'None';
-                          }
-                        });
-                      }),
-                )
-              ],
-            ),
-            const Gap(50),
-            const Text(
-              'Night mode',
-              style: TextStyle(fontSize: 18, fontWeight: FontWeight.w500),
-            ),
-            const Gap(40),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              children: [
-                Text(
-                    'Start Time: ${isReminderOn ? startTime.format(context) : 'None'}'),
-                IconButton(
-                  icon: const Icon(Icons.timer),
-                  onPressed: () async {
-                    final TimeOfDay? timeOfDay = await showTimePicker(
-                      context: context,
-                      initialTime: startTime,
-                    );
-                    if (timeOfDay != null) {
-                      setState(() {
-                        startTime = timeOfDay;
-                      });
-                    }
-                  },
-                ),
-              ],
-            ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              children: [
-                Text(
-                    'End Time: ${isReminderOn ? endTime.format(context) : 'None'}'),
-                IconButton(
-                  icon: const Icon(Icons.timer_off_rounded),
-                  onPressed: () async {
-                    final TimeOfDay? timeOfDay = await showTimePicker(
-                      context: context,
-                      initialTime: endTime,
-                    );
-
-                    if (timeOfDay != null) {
-                      setState(() {
-                        endTime = timeOfDay;
-                      });
-                    }
-                  },
-                ),
-              ],
-            ),
             const Gap(50),
             ElevatedButton(
               onPressed: () async {
@@ -232,5 +193,30 @@ class _SettingState extends State<Setting> {
         ),
       ),
     );
+  }
+}
+
+class NotificationController {
+  static Future<void> onNotificationCreatedMethod(
+      ReceivedNotification receivedNotification) async {
+    debugPrint("created");
+  }
+
+  static Future<void> onNotificationDisplayedMethod(
+      ReceivedNotification receivedNotification) async {
+    debugPrint("Displayed");
+  }
+
+  static Future<void> onDismissActionReceivedMethod(
+      ReceivedAction receivedAction) async {
+    debugPrint("Dismiss");
+  }
+
+  static Future<void> onActionReceivedMethod(
+    ReceivedAction receivedAction,
+  ) async {
+    debugPrint("Test");
+    navigatorKey.currentState
+        ?.push(MaterialPageRoute(builder: (context) => const WaterReminder()));
   }
 }
