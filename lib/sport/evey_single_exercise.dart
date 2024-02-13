@@ -31,33 +31,36 @@ class _HealthyExersiceWidgetState extends State<HealthyExersiceWidget> {
       body: Padding(
         padding: const EdgeInsets.all(20),
         child: Center(
-          child: Column(
-            children: [
-              const Gap(30),
-              Text(
-                widget.description,
-                style:
-                    const TextStyle(fontSize: 24, fontWeight: FontWeight.w600),
-              ),
-              const Gap(50),
-              Container(
-                height: 400,
-                width: 400,
-                decoration: BoxDecoration(
-                    border: Border.all(),
-                    image: DecorationImage(
-                        image: AssetImage(widget.imagePath), fit: BoxFit.fill)),
-              ),
-              Padding(
-                padding: const EdgeInsets.all(50),
-                child: ElevatedButton(
-                    onPressed: () async {
-                      await updateDailyCheckStatus(widget.date, true);
-                      Navigator.pop(context);
-                    },
-                    child: const Text('Workout done')),
-              ),
-            ],
+          child: SingleChildScrollView(
+            child: Column(
+              children: [
+                const Gap(30),
+                Text(
+                  widget.description,
+                  style: const TextStyle(
+                      fontSize: 24, fontWeight: FontWeight.w600),
+                ),
+                const Gap(50),
+                Container(
+                  height: 400,
+                  width: 400,
+                  decoration: BoxDecoration(
+                      border: Border.all(),
+                      image: DecorationImage(
+                          image: AssetImage(widget.imagePath),
+                          fit: BoxFit.fill)),
+                ),
+                Padding(
+                  padding: const EdgeInsets.all(50),
+                  child: ElevatedButton(
+                      onPressed: () async {
+                        await updateDailyCheckStatus(widget.date, true);
+                        Navigator.pop(context);
+                      },
+                      child: const Text('Workout done')),
+                ),
+              ],
+            ),
           ),
         ),
       ),
