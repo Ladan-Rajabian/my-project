@@ -8,18 +8,8 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 GlobalKey<NavigatorState> navigatorKey = GlobalKey<NavigatorState>();
 void main() async {
-  AwesomeNotifications().initialize(
-      null,
-      [
-        NotificationChannel(
-          channelGroupKey: 'alert',
-          channelKey: 'Alerts',
-          channelName: 'Basic notifications',
-          channelDescription: 'Notification channel for basic tests',
-        )
-      ],
-      debug: true);
   WidgetsFlutterBinding.ensureInitialized();
+  await initNotifications();
 
   try {
     await Firebase.initializeApp(
@@ -32,6 +22,20 @@ void main() async {
   }
 
   runApp(MyApp());
+}
+
+Future<void> initNotifications() async {
+  AwesomeNotifications().initialize(
+      null,
+      [
+        NotificationChannel(
+          channelGroupKey: 'alert',
+          channelKey: 'Alerts',
+          channelName: 'Basic notifications',
+          channelDescription: 'Notification channel for basic tests',
+        )
+      ],
+      debug: true);
 }
 
 Future<void> initSharedPreferences() async {

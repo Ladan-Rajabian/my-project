@@ -33,30 +33,24 @@ class _SettingState extends State<Setting> {
 
   @override
   void initState() {
-    AwesomeNotifications().setListeners(
-        onActionReceivedMethod: NotificationController.onActionReceivedMethod,
-        onNotificationCreatedMethod:
-            NotificationController.onNotificationCreatedMethod,
-        onNotificationDisplayedMethod:
-            NotificationController.onNotificationDisplayedMethod,
-        onDismissActionReceivedMethod:
-            NotificationController.onDismissActionReceivedMethod);
+   
     super.initState();
     _cron = Cron()
-      ..schedule(Schedule.parse('0 9,11,13,15,17,19,21,23 * * *'), () {
+      ..schedule(Schedule.parse('0 9,11,13,15,17,19,21,23 * * *'), () async {
         // This function will be executed every 2 hours between 9 AM and 11 PM
-        _showNotification();
+        await _showNotification();
       });
     _requestNotificationPermissions();
     _loadSettings();
   }
+  void scheduleNotifications() {
+  final cron = Cron();
 
-  @override
-  void dispose() {
-    // Stop the cron scheduler when the widget is disposed
-    _cron.close();
-    super.dispose();
-  }
+  // Schedule a notification every minute
+  cron.schedule(Schedule.parse('0 9,11,13,15,17,19,21,23 * * *'), () async {
+    await _showNotification();
+  });
+}
 
   Future<void> _requestNotificationPermissions() async {
     await AwesomeNotifications().requestPermissionToSendNotifications();
@@ -73,13 +67,6 @@ class _SettingState extends State<Setting> {
             title: 'Healthy Way',
             body: 'It\'s time to drink water',
           ),
-          actionButtons: [
-            NotificationActionButton(
-              key: "Alerts",
-              label: "Dismiss",
-              actionType: ActionType.DismissAction,
-            )
-          ],
         );
       }
 
